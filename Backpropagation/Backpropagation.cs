@@ -8,6 +8,7 @@ namespace OSDevGrp.NeuralNetworks
     {
         private System.Collections.Generic.List<uint> _Neurons = null;
         private System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>> _Weigths = null;
+        private System.Collections.Generic.List<System.Collections.Generic.List<float>> _Bias = null;
 
         public Backpropagation(System.Collections.Generic.List<uint> definition)
         {
@@ -69,6 +70,18 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
+        protected System.Collections.Generic.List<System.Collections.Generic.List<float>> Bias
+        {
+            get
+            {
+                return _Bias;
+            }
+            set
+            {
+                _Bias = value;
+            }
+        }
+
         protected void Create(System.Collections.Generic.List<uint> definition)
         {
             try
@@ -91,6 +104,12 @@ namespace OSDevGrp.NeuralNetworks
                     for (int neuron = 0; neuron < Neurons[layer]; neuron++)
                         Weights[layer][neuron] = new System.Collections.Generic.List<float>((int) Neurons[layer + 1]);
                 }
+                // Create the vectors for the bias.
+                if (Bias == null)
+                    Bias = new System.Collections.Generic.List<System.Collections.Generic.List<float>>((int) Layers - 1);
+                Bias.Capacity = (int) Layers - 1;
+                for (int layer = 0; layer < Layers - 1; layer++)
+                    Bias[layer] = new System.Collections.Generic.List<float>((int) Neurons[layer + 1]);
             }
             catch (System.Exception ex)
             {
@@ -102,6 +121,16 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
+                // Destroy the vectors for the bias.
+                if (Bias != null)
+                {
+                    while (Bias.Count > 0)
+                    {
+                        Bias[0].Clear();
+                        Bias.RemoveAt(0);
+                    }
+                    Bias.Clear();
+                }
                 // Destroy the matrix for the weights.
                 if (Weights != null)
                 {
