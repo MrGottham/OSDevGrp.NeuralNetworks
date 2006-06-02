@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Backpropagation")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Neural Networks - Backpropagation")]
+[assembly: AssemblyDescription("Neural Networks - Backpropagation")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Backpropagation")]
-[assembly: AssemblyCopyright("Copyright ©  2006")]
+[assembly: AssemblyCompany("OS Development Group")]
+[assembly: AssemblyProduct("Neural Networks - Backpropagation")]
+[assembly: AssemblyCopyright("Copyright © 2006")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

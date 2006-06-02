@@ -7,7 +7,7 @@
     <ProjectGuid>{45986464-50C4-4931-BEB7-995366D6D0CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Backpropagation</RootNamespace>
+    <RootNamespace>OSDevGrp</RootNamespace>
     <AssemblyName>Backpropagation</AssemblyName>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
