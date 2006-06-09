@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Neural Networks - Backpropagation")]
-[assembly: AssemblyDescription("Neural Networks - Backpropagation")]
+[assembly: AssemblyTitle("Neural Networks")]
+[assembly: AssemblyDescription("Neural Networks")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OS Development Group")]
-[assembly: AssemblyProduct("Neural Networks - Backpropagation")]
+[assembly: AssemblyProduct("Neural Networks")]
 [assembly: AssemblyCopyright("Copyright © 2006 OS Development Group")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("af77b19a-a718-4933-bb4d-03e7964e131e")]
+[assembly: Guid("22c5dc98-25c8-428b-aaf9-76d52b3a419d")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,7 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
