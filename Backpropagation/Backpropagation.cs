@@ -287,6 +287,16 @@ namespace OSDevGrp.NeuralNetworks
         {
             return 0;
         }
+
+        public void Save()
+        {
+            // TODO: Remember to store version in the file.
+        }
+
+        public void Load()
+        {
+            // TODO: Remember to check for the stored version in the file.
+        }
     }
 
     public class ByteBackpropagation : Backpropagation<byte>
