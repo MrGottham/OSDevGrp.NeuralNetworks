@@ -11,7 +11,7 @@ namespace OSDevGrp.NeuralNetworks
         private int _Mirror = 0;
         private int _Slope = 1;
 
-        public Sigmoid(int lowerbound, int upperbound, int mirror, int slope)
+        public Sigmoid(int lowerbound, int upperbound, int mirror, int slope) : base()
         {
             try
             {
@@ -75,14 +75,14 @@ namespace OSDevGrp.NeuralNetworks
         }
     }
 
-    public abstract class Backpropagation<T> : System.Object 
+    public abstract class Backpropagation<T> : System.Object
     {
         private System.Collections.Generic.List<uint> _Neurons = null;
         private System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>> _Weigths = null;
         private System.Collections.Generic.List<System.Collections.Generic.List<float>> _Bias = null;
         private Sigmoid _Sigmoid = null;
 
-        public Backpropagation(System.Collections.Generic.List<uint> definition)
+        public Backpropagation(System.Collections.Generic.List<uint> definition) : base()
         {
             try
             {
