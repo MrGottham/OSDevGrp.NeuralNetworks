@@ -10,19 +10,33 @@ namespace OSDevGrp.NeuralNetworks
 {
     public partial class NeuralNetworks : Form
     {
-        private Backpropagation _Backpropagation = null;
+        private IntBackpropagation _Backpropagation = null;
 
         public NeuralNetworks()
         {
             InitializeComponent();
             try
             {
-                throw new System.NotImplementedException();
+                System.Collections.Generic.List<uint> neurons = new System.Collections.Generic.List<uint>();
+                neurons.Add(2);
+                neurons.Add(3);
+                neurons.Add(1);
+                _Backpropagation = new IntBackpropagation(neurons);
             }
             catch (System.Exception ex)
             {
                 throw ex;
             }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show(this, this.ProductName + "\nVersion: " + this.ProductVersion + "\n\nDevelopment team:\n" + this.CompanyName, "About", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
         }
     }
 }

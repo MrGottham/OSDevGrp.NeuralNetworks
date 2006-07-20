@@ -75,7 +75,7 @@ namespace OSDevGrp.NeuralNetworks
         }
     }
 
-    public class Backpropagation : System.Object 
+    public abstract class Backpropagation<T> : System.Object 
     {
         private System.Collections.Generic.List<uint> _Neurons = null;
         private System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>> _Weigths = null;
@@ -178,23 +178,31 @@ namespace OSDevGrp.NeuralNetworks
                     Neurons = new System.Collections.Generic.List<uint>(definition.Count);
                 Neurons.Capacity = definition.Count;
                 for (int layer = 0; layer < definition.Count; layer++)
-                    Neurons[layer] = definition[layer];
+                    Neurons.Add(definition[layer]);
                 // Create the matrix for the weights.
                 if (Weights == null)
                     Weights = new System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>>((int) Layers - 1);
                 Weights.Capacity = (int) Layers - 1;
                 for (int layer = 0; layer < Layers - 1; layer++)
                 {
-                    Weights[layer] = new System.Collections.Generic.List<System.Collections.Generic.List<float>>((int) Neurons[layer]);
+                    Weights.Add(new System.Collections.Generic.List<System.Collections.Generic.List<float>>((int) Neurons[layer]));
                     for (int neuron = 0; neuron < Neurons[layer]; neuron++)
-                        Weights[layer][neuron] = new System.Collections.Generic.List<float>((int) Neurons[layer + 1]);
+                    {
+                        Weights[layer].Add(new System.Collections.Generic.List<float>((int)Neurons[layer + 1]));
+                        for (int weight = 0; weight < Neurons[layer + 1]; weight++)
+                            Weights[layer][neuron].Add(0);
+                    }
                 }
                 // Create the vectors for the bias.
                 if (Bias == null)
                     Bias = new System.Collections.Generic.List<System.Collections.Generic.List<float>>((int) Layers - 1);
                 Bias.Capacity = (int) Layers - 1;
                 for (int layer = 0; layer < Layers - 1; layer++)
-                    Bias[layer] = new System.Collections.Generic.List<float>((int) Neurons[layer + 1]);
+                {
+                    Bias.Add(new System.Collections.Generic.List<float>((int)Neurons[layer + 1]));
+                    for (int bias = 0; bias < Neurons[layer + 1]; bias++)
+                        Bias[layer].Add(0);
+                }
                 // Create the sigmoid function.
                 if (Sigmoid == null)
                     Sigmoid = new Sigmoid(lowerbound, upperbound, mirror, slope);
@@ -268,6 +276,81 @@ namespace OSDevGrp.NeuralNetworks
                     for (int bias = 0; bias < Neurons[layer + 1]; bias++)
                         Bias[layer][bias] = (float) r.Next(1001) / 1000 - (float) 0.5;
                 }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public float Train(System.Collections.Generic.List<T> input, System.Collections.Generic.List<T> output)
+        {
+            return 0;
+        }
+    }
+
+    public class ByteBackpropagation : Backpropagation<byte>
+    {
+        public ByteBackpropagation(System.Collections.Generic.List<uint> definition) : base(definition)
+        {
+            try
+            {
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+
+    public class CharBackpropagation : Backpropagation<char>
+    {
+        public CharBackpropagation(System.Collections.Generic.List<uint> definition) : base(definition)
+        {
+            try
+            {
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+
+    public class IntBackpropagation : Backpropagation<int>
+    {
+        public IntBackpropagation(System.Collections.Generic.List<uint> definition) : base(definition)
+        {
+            try
+            {
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+
+    public class DoubleBackpropagation : Backpropagation<double>
+    {
+        public DoubleBackpropagation(System.Collections.Generic.List<uint> definition) : base(definition)
+        {
+            try
+            {
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+
+    public class FloatBackpropagation : Backpropagation<float>
+    {
+        public FloatBackpropagation(System.Collections.Generic.List<uint> definition) : base(definition)
+        {
+            try
+            {
             }
             catch (System.Exception ex)
             {

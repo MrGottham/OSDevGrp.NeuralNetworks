@@ -12,9 +12,16 @@ namespace OSDevGrp.NeuralNetworks
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NeuralNetworks());
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new NeuralNetworks());
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(null, ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            }
         }
     }
 }
