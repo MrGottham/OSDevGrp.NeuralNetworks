@@ -31,13 +31,17 @@ namespace OSDevGrp.NeuralNetworks
                 System.Collections.Generic.List<int> target = new System.Collections.Generic.List<int>();
                 target.Add(0);
 
-                double d = 0;
-                for (int i = 0; i < 3000; i++)
-                    d = _Backpropagation.Train(source, target);
+                //double d = 0;
+                //for (int i = 0; i < 3000; i++)
+                    //d = _Backpropagation.Train(source, target);
+
+                _Backpropagation.Load("C:\\Windows\\Temp\\Net.dat");
 
                 System.Collections.Generic.List<float> r = _Backpropagation.Run(source);
                 foreach (float f in r)
                     System.Windows.Forms.MessageBox.Show(f.ToString());
+
+                //_Backpropagation.Save("C:\\Windows\\Temp\\Net.dat");
             }
             catch (System.Exception ex)
             {
