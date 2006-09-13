@@ -18,6 +18,9 @@ namespace OSDevGrp.NeuralNetworks
             try
             {
                 _XOrNet = new XOrNet();
+                this.textBoxXOrNetLearningRate.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "LearningRate"));
+                this.textBoxXOrNetTolerance.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Tolerance"));
+                this.checkBoxXOrNetUseBias.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _XOrNet, "UseBias"));
             }
             catch (System.Exception ex)
             {
@@ -41,6 +44,16 @@ namespace OSDevGrp.NeuralNetworks
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.MessageBox.Show(this, this.ProductName + "\nVersion: " + this.ProductVersion + "\n\nDevelopment team:\n" + this.CompanyName, "About", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+        }
+
+        private void textBoxXOrNetLearningRate_TextChanged(object sender, EventArgs e)
+        {
+            XOrNet.ReTrain();
+        }
+
+        private void checkBoxXOrNetUseBias_Click(object sender, EventArgs e)
+        {
+            XOrNet.ReTrain();
         }
     }
 }

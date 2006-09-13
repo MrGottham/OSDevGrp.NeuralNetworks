@@ -18,8 +18,8 @@ namespace OSDevGrp.NeuralNetworks
                 try
                 {
                     Add(2);
+                    Add(4);
                     Add(3);
-                    Add(5);
                     Add(1);
                 }
                 catch (System.Exception ex)
@@ -75,6 +75,19 @@ namespace OSDevGrp.NeuralNetworks
             {
                 Error = base.Train(TrainSet.Sources, TrainSet.Targets);
                 return Error;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public double ReTrain()
+        {
+            try
+            {
+                base.Initialize();
+                return this.Train();
             }
             catch (System.Exception ex)
             {
