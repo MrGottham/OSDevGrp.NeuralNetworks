@@ -48,12 +48,26 @@ namespace OSDevGrp.NeuralNetworks
 
         private void textBoxXOrNetLearningRate_TextChanged(object sender, EventArgs e)
         {
-            XOrNet.ReTrain();
+            try
+            {
+                XOrNet.ReTrain();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
         }
 
         private void checkBoxXOrNetUseBias_Click(object sender, EventArgs e)
         {
-            XOrNet.ReTrain();
+            try
+            {
+                XOrNet.ReTrain();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
         }
     }
 }
