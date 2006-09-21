@@ -23,10 +23,44 @@ namespace OSDevGrp.NeuralNetworks
                 this.checkBoxXOrNetUseBias.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _XOrNet, "UseBias", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
                 this.textBoxXOrNetErrorValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
                 this.textBoxXOrNetEpochs.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Epochs", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-                foreach(System.Collections.Generic.List<int> source in _XOrNet.TrainPairs.Sources)
+                int no = 0;
+                while (no < _XOrNet.TrainPairs.Sources.Count && no < _XOrNet.TrainPairs.Targets.Count)
                 {
-                    this.listViewXOrNetTrainingPairs.Items.Add("Test");
+                    if (this.listViewXOrNetTrainingPairs.Columns.Count == 0)
+                    {
+                        System.Windows.Forms.ColumnHeader ch = new System.Windows.Forms.ColumnHeader();
+                        ch.Text = "";
+                        ch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+                        this.listViewXOrNetTrainingPairs.Columns.Add(ch);
+                        foreach (int i in _XOrNet.TrainPairs.Sources[no])
+                        {
+                            ch = new System.Windows.Forms.ColumnHeader();
+                            ch.Text = "Value";
+                            ch.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+                            this.listViewXOrNetTrainingPairs.Columns.Add(ch);
+                        }
+                        foreach (int i in _XOrNet.TrainPairs.Targets[no])
+                        {
+                            ch = new System.Windows.Forms.ColumnHeader();
+                            ch.Text = "Result";
+                            ch.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+                            this.listViewXOrNetTrainingPairs.Columns.Add(ch);
+                        }
+                        ch = new System.Windows.Forms.ColumnHeader();
+                        ch.Text = "";
+                        ch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+                        this.listViewXOrNetTrainingPairs.Columns.Add(ch);
+                    }
+                    System.Windows.Forms.ListViewItem lvi = new System.Windows.Forms.ListViewItem("Training pair", 0);
+                    foreach(int i in _XOrNet.TrainPairs.Sources[no])
+                        lvi.SubItems.Add(new System.Windows.Forms.ListViewItem.ListViewSubItem(lvi, i.ToString()));
+                    foreach (int i in _XOrNet.TrainPairs.Targets[no])
+                        lvi.SubItems.Add(new System.Windows.Forms.ListViewItem.ListViewSubItem(lvi, i.ToString()));
+                    this.listViewXOrNetTrainingPairs.Items.Add(lvi);
+                    no++;
                 }
+                foreach (System.Windows.Forms.ColumnHeader ch in this.listViewXOrNetTrainingPairs.Columns)
+                    ch.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.timerTraining.Interval = 2500;
                 this.timerTraining.Enabled = true;
             }
