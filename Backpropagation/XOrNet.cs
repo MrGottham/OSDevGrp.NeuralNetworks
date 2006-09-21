@@ -9,7 +9,8 @@ namespace OSDevGrp.NeuralNetworks
         private const string FILENAME = "XOrNet.dat";
 
         private double _Error = 0;
-        private XOrNetTrainSet _TrainSet = null;
+        private int _Epochs = 0;
+        private XOrNetTrainPairs _TrainPairs = null;
 
         private class Definition : System.Collections.Generic.List<uint>
         {
@@ -19,7 +20,6 @@ namespace OSDevGrp.NeuralNetworks
                 {
                     Add(2);
                     Add(4);
-                    Add(3);
                     Add(1);
                 }
                 catch (System.Exception ex)
@@ -33,7 +33,9 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                _TrainSet = new XOrNetTrainSet();
+                base.Tolerance = 0.03;
+                base.UseBias = true;
+                _TrainPairs = new XOrNetTrainPairs();
             }
             catch (System.Exception ex)
             {
@@ -53,7 +55,7 @@ namespace OSDevGrp.NeuralNetworks
         {
             get
             {
-                return _Error;
+                return System.Math.Round(_Error, 5);
             }
             private set
             {
@@ -61,11 +63,23 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        public XOrNetTrainSet TrainSet
+        public int Epochs
         {
             get
             {
-                return _TrainSet;
+                return _Epochs;
+            }
+            private set
+            {
+                _Epochs = value;
+            }
+        }
+
+        public XOrNetTrainPairs TrainPairs
+        {
+            get
+            {
+                return _TrainPairs;
             }
         }
 
@@ -73,7 +87,8 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                Error = base.Train(TrainSet.Sources, TrainSet.Targets);
+                Epochs++;
+                Error = base.Train(TrainPairs.Sources, TrainPairs.Targets);
                 return Error;
             }
             catch (System.Exception ex)
@@ -86,6 +101,7 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
+                Epochs = 0;
                 base.Initialize();
                 return this.Train();
             }
@@ -120,12 +136,12 @@ namespace OSDevGrp.NeuralNetworks
         }
     }
 
-    public class XOrNetTrainSet : System.Object 
+    public class XOrNetTrainPairs : System.Object
     {
         private System.Collections.Generic.List<System.Collections.Generic.List<int>> _Sources = null;
         private System.Collections.Generic.List<System.Collections.Generic.List<int>> _Targets = null;
 
-        public XOrNetTrainSet() : base()
+        public XOrNetTrainPairs() : base()
         {
             try
             {
@@ -155,7 +171,7 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        ~XOrNetTrainSet()
+        ~XOrNetTrainPairs()
         {
             try
             {
