@@ -10,6 +10,7 @@ namespace OSDevGrp.NeuralNetworks
 
         private double _Error = 0;
         private int _Epochs = 0;
+        private float _Result = 0;
         private XOrNetTrainPairs _TrainPairs = null;
 
         private class Definition : System.Collections.Generic.List<uint>
@@ -75,6 +76,34 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
+        public float FloatResult
+        {
+            get
+            {
+                return (float) System.Math.Round(_Result, 5);
+            }
+            private set
+            {
+                _Result = value;
+            }
+        }
+
+        public int IntegerResult
+        {
+            get
+            {
+                return System.Convert.ToInt32(FloatResult);
+            }
+        }
+
+        public bool BooleanResult
+        {
+            get
+            {
+                return System.Convert.ToBoolean(IntegerResult);
+            }
+        }
+
         public XOrNetTrainPairs TrainPairs
         {
             get
@@ -104,6 +133,49 @@ namespace OSDevGrp.NeuralNetworks
                 Epochs = 0;
                 base.Initialize();
                 return this.Train();
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public float Run(int value1, int value2)
+        {
+            try
+            {
+                System.Collections.Generic.List<int> input = new System.Collections.Generic.List<int>((int) base.Neurons[0]);
+                for (int neuron = 0; neuron < base.Neurons[0]; neuron++)
+                {
+                    switch (neuron)
+                    {
+                        case 0:
+                            input.Add(value1);
+                            break;
+                        case 1:
+                            input.Add(value2);
+                            break;
+                        default:
+                            input.Add(0);
+                            break;
+                    }
+                }
+                System.Collections.Generic.List<float> output = base.Run(input);
+                if (output.Count > 0)
+                    FloatResult = output[0];
+                return FloatResult;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public float Run(bool value1, bool value2)
+        {
+            try
+            {
+                return this.Run(System.Convert.ToInt32(value1), System.Convert.ToInt32(value2));
             }
             catch (System.Exception ex)
             {

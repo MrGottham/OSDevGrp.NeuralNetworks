@@ -23,6 +23,8 @@ namespace OSDevGrp.NeuralNetworks
                 this.checkBoxXOrNetUseBias.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _XOrNet, "UseBias", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
                 this.textBoxXOrNetErrorValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
                 this.textBoxXOrNetEpochs.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Epochs", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                this.textBoxXOrNetFloatResult.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "FloatResult", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                this.checkBoxXOrNetResult.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _XOrNet, "BooleanResult", true, System.Windows.Forms.DataSourceUpdateMode.Never));
                 int no = 0;
                 while (no < _XOrNet.TrainPairs.Sources.Count && no < _XOrNet.TrainPairs.Targets.Count)
                 {
@@ -88,11 +90,16 @@ namespace OSDevGrp.NeuralNetworks
                     if (XOrNet.Error > XOrNet.Tolerance)
                     {
                         double d = XOrNet.Train();
+                        float f = XOrNet.Run(this.checkBoxXOrNetValue1.Checked, this.checkBoxXOrNetValue2.Checked);
+                        foreach (System.Windows.Forms.Binding binding in this.textBoxXOrNetErrorValue.DataBindings)
+                            binding.ReadValue();
+                        foreach (System.Windows.Forms.Binding binding in this.textBoxXOrNetEpochs.DataBindings)
+                            binding.ReadValue();
+                        foreach (System.Windows.Forms.Binding binding in this.textBoxXOrNetFloatResult.DataBindings)
+                            binding.ReadValue();
+                        foreach (System.Windows.Forms.Binding binding in this.checkBoxXOrNetResult.DataBindings)
+                            binding.ReadValue();
                     }
-                    foreach (System.Windows.Forms.Binding binding in this.textBoxXOrNetErrorValue.DataBindings)
-                        binding.ReadValue();
-                    foreach (System.Windows.Forms.Binding binding in this.textBoxXOrNetEpochs.DataBindings)
-                        binding.ReadValue();
                 }
                 this.timerTraining.Interval = 100;
                 this.timerTraining.Enabled = true;
@@ -131,6 +138,22 @@ namespace OSDevGrp.NeuralNetworks
             try
             {
                 XOrNet.ReTrain();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void checkBoxXOrNetValue_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                float f = XOrNet.Run(this.checkBoxXOrNetValue1.Checked, this.checkBoxXOrNetValue2.Checked);
+                foreach (System.Windows.Forms.Binding binding in this.textBoxXOrNetFloatResult.DataBindings)
+                    binding.ReadValue();
+                foreach (System.Windows.Forms.Binding binding in this.checkBoxXOrNetResult.DataBindings)
+                    binding.ReadValue();
             }
             catch (System.Exception ex)
             {

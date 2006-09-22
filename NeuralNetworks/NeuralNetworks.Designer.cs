@@ -29,7 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.GroupBox groupBoxXOrNetRunning;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NeuralNetworks));
+            this.checkBoxXOrNetResult = new System.Windows.Forms.CheckBox();
+            this.textBoxXOrNetFloatResult = new System.Windows.Forms.TextBox();
+            this.labelXOrNetEqual = new System.Windows.Forms.Label();
+            this.checkBoxXOrNetValue2 = new System.Windows.Forms.CheckBox();
+            this.labelXOrNetXOr = new System.Windows.Forms.Label();
+            this.checkBoxXOrNetValue1 = new System.Windows.Forms.CheckBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +55,7 @@
             this.labelXOrNetEpochs = new System.Windows.Forms.Label();
             this.textBoxXOrNetErrorValue = new System.Windows.Forms.TextBox();
             this.labelXOrNetErrorValue = new System.Windows.Forms.Label();
+            this.panelXOrNetRunning = new System.Windows.Forms.Panel();
             this.panelXOrNetConfiguration = new System.Windows.Forms.Panel();
             this.groupBoxXOrNetConfiguration = new System.Windows.Forms.GroupBox();
             this.checkBoxXOrNetUseBias = new System.Windows.Forms.CheckBox();
@@ -57,6 +65,8 @@
             this.labelXOrNetLearningRate = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.timerTraining = new System.Windows.Forms.Timer(this.components);
+            groupBoxXOrNetRunning = new System.Windows.Forms.GroupBox();
+            groupBoxXOrNetRunning.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.tabPageXOrNet.SuspendLayout();
             this.panelXOrNetTraining.SuspendLayout();
@@ -64,10 +74,90 @@
             this.panelXOrNetTrainingPairs.SuspendLayout();
             this.groupBoxXOrNetTrainingPairs.SuspendLayout();
             this.panelXOrNetTrainingValues.SuspendLayout();
+            this.panelXOrNetRunning.SuspendLayout();
             this.panelXOrNetConfiguration.SuspendLayout();
             this.groupBoxXOrNetConfiguration.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // groupBoxXOrNetRunning
+            // 
+            groupBoxXOrNetRunning.Controls.Add(this.checkBoxXOrNetResult);
+            groupBoxXOrNetRunning.Controls.Add(this.textBoxXOrNetFloatResult);
+            groupBoxXOrNetRunning.Controls.Add(this.labelXOrNetEqual);
+            groupBoxXOrNetRunning.Controls.Add(this.checkBoxXOrNetValue2);
+            groupBoxXOrNetRunning.Controls.Add(this.labelXOrNetXOr);
+            groupBoxXOrNetRunning.Controls.Add(this.checkBoxXOrNetValue1);
+            groupBoxXOrNetRunning.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBoxXOrNetRunning.Location = new System.Drawing.Point(0, 0);
+            groupBoxXOrNetRunning.Name = "groupBoxXOrNetRunning";
+            groupBoxXOrNetRunning.Size = new System.Drawing.Size(578, 47);
+            groupBoxXOrNetRunning.TabIndex = 0;
+            groupBoxXOrNetRunning.TabStop = false;
+            groupBoxXOrNetRunning.Text = "Running";
+            // 
+            // checkBoxXOrNetResult
+            // 
+            this.checkBoxXOrNetResult.AutoSize = true;
+            this.checkBoxXOrNetResult.Enabled = false;
+            this.checkBoxXOrNetResult.Location = new System.Drawing.Point(236, 19);
+            this.checkBoxXOrNetResult.Name = "checkBoxXOrNetResult";
+            this.checkBoxXOrNetResult.Size = new System.Drawing.Size(56, 17);
+            this.checkBoxXOrNetResult.TabIndex = 5;
+            this.checkBoxXOrNetResult.TabStop = false;
+            this.checkBoxXOrNetResult.Text = "Result";
+            this.checkBoxXOrNetResult.UseVisualStyleBackColor = true;
+            // 
+            // textBoxXOrNetFloatResult
+            // 
+            this.textBoxXOrNetFloatResult.Location = new System.Drawing.Point(182, 17);
+            this.textBoxXOrNetFloatResult.Name = "textBoxXOrNetFloatResult";
+            this.textBoxXOrNetFloatResult.ReadOnly = true;
+            this.textBoxXOrNetFloatResult.Size = new System.Drawing.Size(48, 20);
+            this.textBoxXOrNetFloatResult.TabIndex = 4;
+            this.textBoxXOrNetFloatResult.TabStop = false;
+            // 
+            // labelXOrNetEqual
+            // 
+            this.labelXOrNetEqual.AutoSize = true;
+            this.labelXOrNetEqual.Location = new System.Drawing.Point(163, 20);
+            this.labelXOrNetEqual.Name = "labelXOrNetEqual";
+            this.labelXOrNetEqual.Size = new System.Drawing.Size(13, 13);
+            this.labelXOrNetEqual.TabIndex = 3;
+            this.labelXOrNetEqual.Text = "=";
+            // 
+            // checkBoxXOrNetValue2
+            // 
+            this.checkBoxXOrNetValue2.AutoSize = true;
+            this.checkBoxXOrNetValue2.Location = new System.Drawing.Point(104, 19);
+            this.checkBoxXOrNetValue2.Name = "checkBoxXOrNetValue2";
+            this.checkBoxXOrNetValue2.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxXOrNetValue2.TabIndex = 2;
+            this.checkBoxXOrNetValue2.Text = "Value";
+            this.checkBoxXOrNetValue2.UseVisualStyleBackColor = true;
+            this.checkBoxXOrNetValue2.Click += new System.EventHandler(this.checkBoxXOrNetValue_Click);
+            // 
+            // labelXOrNetXOr
+            // 
+            this.labelXOrNetXOr.AutoSize = true;
+            this.labelXOrNetXOr.Location = new System.Drawing.Point(68, 20);
+            this.labelXOrNetXOr.Name = "labelXOrNetXOr";
+            this.labelXOrNetXOr.Size = new System.Drawing.Size(30, 13);
+            this.labelXOrNetXOr.TabIndex = 1;
+            this.labelXOrNetXOr.Text = "XOR";
+            // 
+            // checkBoxXOrNetValue1
+            // 
+            this.checkBoxXOrNetValue1.AutoSize = true;
+            this.checkBoxXOrNetValue1.Checked = true;
+            this.checkBoxXOrNetValue1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxXOrNetValue1.Location = new System.Drawing.Point(9, 19);
+            this.checkBoxXOrNetValue1.Name = "checkBoxXOrNetValue1";
+            this.checkBoxXOrNetValue1.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxXOrNetValue1.TabIndex = 0;
+            this.checkBoxXOrNetValue1.Text = "Value";
+            this.checkBoxXOrNetValue1.UseVisualStyleBackColor = true;
+            this.checkBoxXOrNetValue1.Click += new System.EventHandler(this.checkBoxXOrNetValue_Click);
             // 
             // menuStrip
             // 
@@ -112,6 +202,7 @@
             // tabPageXOrNet
             // 
             this.tabPageXOrNet.Controls.Add(this.panelXOrNetTraining);
+            this.tabPageXOrNet.Controls.Add(this.panelXOrNetRunning);
             this.tabPageXOrNet.Controls.Add(this.panelXOrNetConfiguration);
             this.tabPageXOrNet.Location = new System.Drawing.Point(4, 22);
             this.tabPageXOrNet.Name = "tabPageXOrNet";
@@ -127,7 +218,7 @@
             this.panelXOrNetTraining.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelXOrNetTraining.Location = new System.Drawing.Point(3, 101);
             this.panelXOrNetTraining.Name = "panelXOrNetTraining";
-            this.panelXOrNetTraining.Size = new System.Drawing.Size(578, 292);
+            this.panelXOrNetTraining.Size = new System.Drawing.Size(578, 245);
             this.panelXOrNetTraining.TabIndex = 1;
             // 
             // groupBoxXOrNetTraining
@@ -137,7 +228,7 @@
             this.groupBoxXOrNetTraining.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxXOrNetTraining.Location = new System.Drawing.Point(0, 0);
             this.groupBoxXOrNetTraining.Name = "groupBoxXOrNetTraining";
-            this.groupBoxXOrNetTraining.Size = new System.Drawing.Size(578, 292);
+            this.groupBoxXOrNetTraining.Size = new System.Drawing.Size(578, 245);
             this.groupBoxXOrNetTraining.TabIndex = 0;
             this.groupBoxXOrNetTraining.TabStop = false;
             this.groupBoxXOrNetTraining.Text = "Training";
@@ -148,7 +239,7 @@
             this.panelXOrNetTrainingPairs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelXOrNetTrainingPairs.Location = new System.Drawing.Point(3, 73);
             this.panelXOrNetTrainingPairs.Name = "panelXOrNetTrainingPairs";
-            this.panelXOrNetTrainingPairs.Size = new System.Drawing.Size(572, 216);
+            this.panelXOrNetTrainingPairs.Size = new System.Drawing.Size(572, 169);
             this.panelXOrNetTrainingPairs.TabIndex = 1;
             // 
             // groupBoxXOrNetTrainingPairs
@@ -157,7 +248,7 @@
             this.groupBoxXOrNetTrainingPairs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxXOrNetTrainingPairs.Location = new System.Drawing.Point(0, 0);
             this.groupBoxXOrNetTrainingPairs.Name = "groupBoxXOrNetTrainingPairs";
-            this.groupBoxXOrNetTrainingPairs.Size = new System.Drawing.Size(572, 216);
+            this.groupBoxXOrNetTrainingPairs.Size = new System.Drawing.Size(572, 169);
             this.groupBoxXOrNetTrainingPairs.TabIndex = 0;
             this.groupBoxXOrNetTrainingPairs.TabStop = false;
             this.groupBoxXOrNetTrainingPairs.Text = "Training pairs";
@@ -170,7 +261,7 @@
             this.listViewXOrNetTrainingPairs.LargeImageList = this.imageListLarge;
             this.listViewXOrNetTrainingPairs.Location = new System.Drawing.Point(3, 16);
             this.listViewXOrNetTrainingPairs.Name = "listViewXOrNetTrainingPairs";
-            this.listViewXOrNetTrainingPairs.Size = new System.Drawing.Size(566, 197);
+            this.listViewXOrNetTrainingPairs.Size = new System.Drawing.Size(566, 150);
             this.listViewXOrNetTrainingPairs.SmallImageList = this.imageListSmall;
             this.listViewXOrNetTrainingPairs.TabIndex = 0;
             this.listViewXOrNetTrainingPairs.UseCompatibleStateImageBehavior = false;
@@ -235,6 +326,15 @@
             this.labelXOrNetErrorValue.Size = new System.Drawing.Size(58, 13);
             this.labelXOrNetErrorValue.TabIndex = 0;
             this.labelXOrNetErrorValue.Text = "Error value";
+            // 
+            // panelXOrNetRunning
+            // 
+            this.panelXOrNetRunning.Controls.Add(groupBoxXOrNetRunning);
+            this.panelXOrNetRunning.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelXOrNetRunning.Location = new System.Drawing.Point(3, 346);
+            this.panelXOrNetRunning.Name = "panelXOrNetRunning";
+            this.panelXOrNetRunning.Size = new System.Drawing.Size(578, 47);
+            this.panelXOrNetRunning.TabIndex = 2;
             // 
             // panelXOrNetConfiguration
             // 
@@ -325,9 +425,12 @@
             this.ClientSize = new System.Drawing.Size(592, 446);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "NeuralNetworks";
             this.Text = "Neural Networks";
+            groupBoxXOrNetRunning.ResumeLayout(false);
+            groupBoxXOrNetRunning.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.tabPageXOrNet.ResumeLayout(false);
@@ -337,6 +440,7 @@
             this.groupBoxXOrNetTrainingPairs.ResumeLayout(false);
             this.panelXOrNetTrainingValues.ResumeLayout(false);
             this.panelXOrNetTrainingValues.PerformLayout();
+            this.panelXOrNetRunning.ResumeLayout(false);
             this.panelXOrNetConfiguration.ResumeLayout(false);
             this.groupBoxXOrNetConfiguration.ResumeLayout(false);
             this.groupBoxXOrNetConfiguration.PerformLayout();
@@ -375,6 +479,13 @@
         private System.Windows.Forms.ListView listViewXOrNetTrainingPairs;
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.ImageList imageListLarge;
+        private System.Windows.Forms.Panel panelXOrNetRunning;
+        private System.Windows.Forms.CheckBox checkBoxXOrNetValue1;
+        private System.Windows.Forms.Label labelXOrNetXOr;
+        private System.Windows.Forms.CheckBox checkBoxXOrNetValue2;
+        private System.Windows.Forms.TextBox textBoxXOrNetFloatResult;
+        private System.Windows.Forms.Label labelXOrNetEqual;
+        private System.Windows.Forms.CheckBox checkBoxXOrNetResult;
     }
 }
 
