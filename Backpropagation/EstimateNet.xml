@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<EstimateNet>
+  <InputCategories>
+    <InputCategory>
+      <Name>Area</Name>
+      <Description>The areal of the house</Description>
+      <InputValue>
+        <Name>&lt;= 50 m²</Name>
+        <Description>The areal is lower or equal to 50 m²</Description>
+      </InputValue>
+      <InputValue>
+        <Name>51 - 90 m²</Name>
+        <Description>The areal is between 51 and 90 m²</Description>
+      </InputValue>
+      <InputValue>
+        <Name>91 - 110 m²</Name>
+        <Description>The areal is between 91 and 110 m²</Description>
+      </InputValue>
+      <InputValue>
+        <Name>111 - 130 m²</Name>
+        <Description>The areal is between 111 and 130 m²</Description>
+      </InputValue>
+      <InputValue>
+        <Name>131 - 150 m²</Name>
+        <Description>The areal is between 131 and 150 m²</Description>
+      </InputValue>
+      <InputValue>
+        <Name>151 - 170 m²</Name>
+        <Description>The areal is between 151 and 170 m²</Description>
+      </InputValue>
+      <InputValue>
+        <Name>171 - 190 m²</Name>
+        <Description>The areal is between 171 and 190 m²</Description>
+      </InputValue>
+      <InputValue>
+        <Name>&gt;= 191 m²</Name>
+        <Description>The areal is greater or equal to 190 m²</Description>
+      </InputValue>
+    </InputCategory>
+    <InputCategory>
+      <Name>Rooms</Name>
+      <Description>The number of rooms in the house</Description>
+      <InputValue>
+        <Name>&lt; 3</Name>
+        <Description>The house has less then 3 rooms</Description>
+      </InputValue>
+      <InputValue>
+        <Name>3</Name>
+        <Description>The house has 3 rooms</Description>
+      </InputValue>
+      <InputValue>
+        <Name>4</Name>
+        <Description>The house has 4 rooms</Description>
+      </InputValue>
+      <InputValue>
+        <Name>5</Name>
+        <Description>The house has 5 rooms</Description>
+      </InputValue>
+      <InputValue>
+        <Name>6</Name>
+        <Description>The house has 6 rooms</Description>
+      </InputValue>
+      <InputValue>
+        <Name>&gt; 6</Name>
+        <Description>The house has more then 6 rooms</Description>
+      </InputValue>
+    </InputCategory>
+  </InputCategories>
+</EstimateNet>

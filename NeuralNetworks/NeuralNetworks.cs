@@ -11,6 +11,7 @@ namespace OSDevGrp.NeuralNetworks
     public partial class NeuralNetworks : Form
     {
         private XOrNet _XOrNet = null;
+        private EstimateNet _EstimateNet = null;
 
         public NeuralNetworks()
         {
@@ -18,13 +19,14 @@ namespace OSDevGrp.NeuralNetworks
             try
             {
                 _XOrNet = new XOrNet();
+                _EstimateNet = new EstimateNet();
+                this.textBoxXOrNetLearningRate.Tag = _XOrNet;
                 this.textBoxXOrNetLearningRate.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "LearningRate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
                 this.textBoxXOrNetTolerance.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Tolerance", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+                this.checkBoxXOrNetUseBias.Tag = _XOrNet; 
                 this.checkBoxXOrNetUseBias.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _XOrNet, "UseBias", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
                 this.textBoxXOrNetErrorValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
                 this.textBoxXOrNetEpochs.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "Epochs", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-                this.textBoxXOrNetFloatResult.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "FloatResult", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-                this.checkBoxXOrNetResult.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _XOrNet, "BooleanResult", true, System.Windows.Forms.DataSourceUpdateMode.Never));
                 int no = 0;
                 while (no < _XOrNet.TrainPairs.Sources.Count && no < _XOrNet.TrainPairs.Targets.Count)
                 {
@@ -63,6 +65,32 @@ namespace OSDevGrp.NeuralNetworks
                 }
                 foreach (System.Windows.Forms.ColumnHeader ch in this.listViewXOrNetTrainingPairs.Columns)
                     ch.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.textBoxXOrNetFloatResult.DataBindings.Add(new System.Windows.Forms.Binding("Text", _XOrNet, "FloatResult", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                this.checkBoxXOrNetResult.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _XOrNet, "BooleanResult", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                this.textBoxEstimateNetLarningRate.Tag = _EstimateNet;
+                this.textBoxEstimateNetLarningRate.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "LearningRate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+                this.textBoxEstimateNetTolerance.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Tolerance", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+                this.checkBoxEstimateNetUseBias.Tag = _EstimateNet;
+                this.checkBoxEstimateNetUseBias.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _EstimateNet, "UseBias", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+                this.textBoxEstimateNetErrorValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                this.textBoxEstimateNetEpochs.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                this.comboBoxEstimateNetCategory.BeginUpdate();
+                this.comboBoxEstimateNetCategory.DataSource = _EstimateNet.InputCategories;
+                this.comboBoxEstimateNetCategory.DisplayMember = "Name";
+                this.comboBoxEstimateNetCategory.ValueMember = "This";
+                this.comboBoxEstimateNetCategory.EndUpdate();
+                if (this.comboBoxEstimateNetCategory.Items.Count > 0)
+                {
+                    this.comboBoxEstimateNetCategory.SelectedIndex = 0;
+
+                    this.comboBoxEstimateNetValue.BeginUpdate();
+                    this.comboBoxEstimateNetValue.DataSource = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).InputValues;
+                    this.comboBoxEstimateNetValue.DisplayMember = "Name";
+                    this.comboBoxEstimateNetValue.ValueMember = "This";
+                    if (this.comboBoxEstimateNetValue.Items.Count > 0)
+                        this.comboBoxEstimateNetValue.SelectedItem = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).SelectedInputValue;
+                    this.comboBoxEstimateNetValue.EndUpdate();
+                }
                 this.timerTraining.Interval = 2500;
                 this.timerTraining.Enabled = true;
             }
@@ -77,6 +105,14 @@ namespace OSDevGrp.NeuralNetworks
             get
             {
                 return _XOrNet;
+            }
+        }
+
+        private EstimateNet EstimateNet
+        {
+            get
+            {
+                return _EstimateNet;
             }
         }
 
@@ -121,11 +157,22 @@ namespace OSDevGrp.NeuralNetworks
             System.Windows.Forms.MessageBox.Show(this, this.ProductName + "\nVersion: " + this.ProductVersion + "\n\nDevelopment team:\n" + this.CompanyName, "About", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
         }
 
-        private void textBoxXOrNetLearningRate_TextChanged(object sender, EventArgs e)
+        private void textBoxLearningRate_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                XOrNet.ReTrain();
+                if (sender.GetType() == typeof(System.Windows.Forms.TextBox))
+                {
+                    if (((System.Windows.Forms.TextBox) sender).Tag != null)
+                    {
+                        if (((System.Windows.Forms.TextBox) sender).Tag.GetType() == typeof(XOrNet))
+                            XOrNet.ReTrain();
+                        else if (((System.Windows.Forms.TextBox) sender).Tag.GetType() == typeof(EstimateNet))
+                            EstimateNet.ReTrain();
+                        else
+                            throw new System.NotImplementedException();
+                    }
+                }
             }
             catch (System.Exception ex)
             {
@@ -133,11 +180,22 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        private void checkBoxXOrNetUseBias_Click(object sender, EventArgs e)
+        private void checkBoxUseBias_Click(object sender, EventArgs e)
         {
             try
             {
-                XOrNet.ReTrain();
+                if (sender.GetType() == typeof(System.Windows.Forms.CheckBox))
+                {
+                    if (((System.Windows.Forms.CheckBox) sender).Tag != null)
+                    {
+                        if (((System.Windows.Forms.CheckBox) sender).Tag.GetType() == typeof(XOrNet))
+                            XOrNet.ReTrain();
+                        else if (((System.Windows.Forms.CheckBox) sender).Tag.GetType() == typeof(EstimateNet))
+                            EstimateNet.ReTrain();
+                        else
+                            throw new System.NotImplementedException();
+                    }
+                }
             }
             catch (System.Exception ex)
             {
@@ -154,6 +212,46 @@ namespace OSDevGrp.NeuralNetworks
                     binding.ReadValue();
                 foreach (System.Windows.Forms.Binding binding in this.checkBoxXOrNetResult.DataBindings)
                     binding.ReadValue();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void comboBoxEstimateNetCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.comboBoxEstimateNetValue.BeginUpdate();
+                if (this.comboBoxEstimateNetValue.ValueMember.Length > 0)
+                    this.comboBoxEstimateNetValue.ValueMember = "";
+                this.comboBoxEstimateNetValue.DataSource = null;
+                if (this.comboBoxEstimateNetCategory.SelectedIndex >= 0)
+                {
+                    this.comboBoxEstimateNetValue.DataSource = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).InputValues;
+                    this.comboBoxEstimateNetValue.DisplayMember = "Name";
+                    this.comboBoxEstimateNetValue.ValueMember = "This";
+                    if (this.comboBoxEstimateNetValue.Items.Count > 0)
+                        this.comboBoxEstimateNetValue.SelectedItem = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).SelectedInputValue;
+                }
+                this.comboBoxEstimateNetValue.EndUpdate();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void comboBoxEstimateNetValue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.comboBoxEstimateNetValue.ValueMember.Length > 0)
+                {
+                    if (this.comboBoxEstimateNetCategory.SelectedIndex >= 0)
+                        ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).SelectedInputValue = (EstimateNetInputValue) this.comboBoxEstimateNetValue.SelectedValue;
+                }
             }
             catch (System.Exception ex)
             {

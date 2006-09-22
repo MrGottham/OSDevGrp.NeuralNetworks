@@ -39,11 +39,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backpropagation.cs" />
+    <Compile Include="EstimateNet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XOrNet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Backpropagation.ico" />
+    <Content Include="EstimateNet.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
