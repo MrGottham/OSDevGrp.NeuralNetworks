@@ -5,9 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backpropagation", "Backprop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworks", "NeuralNetworks\NeuralNetworks.csproj", "{0421FB6B-57CF-4114-96B8-671568F8F58F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{2157993F-2B78-4843-93DB-26D0F270B181}"
+EndProject
 Global
 	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Backpropagation\\Backpropagation.csproj
 		SccLocalPath1 = .
@@ -15,6 +17,9 @@ Global
 		SccProjectUniqueName2 = NeuralNetworks\\NeuralNetworks.csproj
 		SccLocalPath2 = .
 		SccProjectFilePathRelativizedFromConnection2 = NeuralNetworks\\
+		SccProjectUniqueName3 = Setup\\Setup.vdproj
+		SccLocalPath3 = .
+		SccProjectFilePathRelativizedFromConnection3 = Setup\\
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +34,8 @@ Global
 		{0421FB6B-57CF-4114-96B8-671568F8F58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0421FB6B-57CF-4114-96B8-671568F8F58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0421FB6B-57CF-4114-96B8-671568F8F58F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2157993F-2B78-4843-93DB-26D0F270B181}.Debug|Any CPU.ActiveCfg = Debug
+		{2157993F-2B78-4843-93DB-26D0F270B181}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
