@@ -66,4 +66,8 @@
       </InputValue>
     </InputCategory>
   </InputCategories>
+  <Output>
+    <Name>Price</Name>
+    <Description>Description</Description>
+  </Output>
 </EstimateNet>
