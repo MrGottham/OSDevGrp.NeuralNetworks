@@ -242,7 +242,7 @@ namespace OSDevGrp.NeuralNetworks
                     _SelectedInputValue = InputValues[i];
                 }
                 else
-                    throw new Exception("Can't find any nodes named 'InputValue' under the 'InputCategory' named '" + Name + "' in the file named '" + setupfilename + "'.");
+                    throw new System.Exception("Can't find any nodes named 'InputValue' under the 'InputCategory' named '" + Name + "' in the file named '" + setupfilename + "'.");
             }
             catch (System.Exception ex)
             {
@@ -406,11 +406,13 @@ namespace OSDevGrp.NeuralNetworks
     {
         private System.Xml.XmlNode _Name = null;
         private System.Xml.XmlNode _Description = null;
+        private System.Collections.Generic.List<EstimateNetOutputValue> _OutputValues = null;
 
         public EstimateNetOutput(System.Xml.XmlNode xmlnode, uint neurons, string setupfilename) : base()
         {
             try
             {
+                _OutputValues = new System.Collections.Generic.List<EstimateNetOutputValue>((int) neurons);
                 foreach (System.Xml.XmlNode xmlchildnode in xmlnode.ChildNodes)
                 {
                     switch (xmlchildnode.Name.ToUpper())
@@ -421,9 +423,15 @@ namespace OSDevGrp.NeuralNetworks
                         case "DESCRIPTION":
                             _Description = xmlchildnode;
                             break;
+                        case "OUTPUTVALUE":
+                            if (_OutputValues.Count < _OutputValues.Capacity)
+                                _OutputValues.Add(new EstimateNetOutputValue(xmlchildnode));
+                            break;
                     }
                 }
-            }
+                if (_OutputValues.Count == 0)
+                    throw new System.Exception("Can't find any nodes named 'OutputValue' under the node named 'Output' in the file named '" + setupfilename + "'.");
+                }
             catch (System.Exception ex)
             {
                 throw ex;
@@ -434,10 +442,23 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
+                if (OutputValues != null)
+                {
+                    while (OutputValues.Count > 0)
+                        OutputValues.Clear();
+                }
             }
             catch (System.Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public EstimateNetOutput This
+        {
+            get
+            {
+                return this;
             }
         }
 
@@ -462,6 +483,81 @@ namespace OSDevGrp.NeuralNetworks
             {
                 if (_Description != null)
                     return _Description.Name;
+                return string.Empty;
+            }
+            set
+            {
+                if (_Description != null)
+                    _Description.InnerText = value;
+            }
+        }
+
+        public System.Collections.Generic.List<EstimateNetOutputValue> OutputValues
+        {
+            get
+            {
+                return _OutputValues;
+            }
+        }
+    }
+
+    public class EstimateNetOutputValue : System.Object
+    {
+        private System.Xml.XmlNode _Name = null;
+        private System.Xml.XmlNode _Description = null;
+
+        public EstimateNetOutputValue(System.Xml.XmlNode xmlnode) : base()
+        {
+            try
+            {
+                foreach (System.Xml.XmlNode xmlchildnode in xmlnode.ChildNodes)
+                {
+                    switch (xmlchildnode.Name.ToUpper())
+                    {
+                        case "NAME":
+                            _Name = xmlchildnode;
+                            break;
+                        case "DESCRIPTION":
+                            _Description = xmlchildnode;
+                            break;
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public EstimateNetOutputValue This
+        {
+            get
+            {
+                return This;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                if (_Name != null)
+                    return _Name.InnerText;
+                return string.Empty;
+            }
+            set
+            {
+                if (_Name != null)
+                    _Name.InnerText = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                if (_Description != null)
+                    return _Description.InnerText;
                 return string.Empty;
             }
             set
