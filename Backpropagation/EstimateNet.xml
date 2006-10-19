@@ -74,20 +74,36 @@
       <Description>The price is lower than 250.000</Description>
     </OutputValue>
     <OutputValue>
-      <Name>250.000 - 500.000</Name>
-      <Description>The price is between 250.000 and 500.000</Description>
+      <Name>250.000 - 499.999</Name>
+      <Description>The price is between 250.000 and 499.999</Description>
     </OutputValue>
     <OutputValue>
-      <Name>500.000 - 750.000</Name>
-      <Description>The price is between 500.000 and 750.000</Description>
+      <Name>500.000 - 749.999</Name>
+      <Description>The price is between 500.000 and 749.999</Description>
     </OutputValue>
     <OutputValue>
-      <Name>750.000 - 1.000.000</Name>
-      <Description>The price is between 750.000 and 1.000.000</Description>
+      <Name>750.000 - 999.999</Name>
+      <Description>The price is between 750.000 and 999.999</Description>
     </OutputValue>
     <OutputValue>
-      <Name>1.000.000 - 1.250.000</Name>
-      <Description>The price is between 1.000.000 and 1.250.000</Description>
+      <Name>1.000.000 - 1.249.999</Name>
+      <Description>The price is between 1.000.000 and 1.249.999</Description>
+    </OutputValue>
+    <OutputValue>
+      <Name>1.250.000 - 1.499.999</Name>
+      <Description>The price is between 1.250.000 and 1.499.999</Description>
+    </OutputValue>
+    <OutputValue>
+      <Name>1.500.000 - 1.749.999</Name>
+      <Description>The price is between 1.500.000 and 1.749.999</Description>
+    </OutputValue>
+    <OutputValue>
+      <Name>1.750.000 - 1.999.999</Name>
+      <Description>The price is between 1.750.000 and 1.999.999</Description>
+    </OutputValue>
+    <OutputValue>
+      <Name>&gt;= 2.000.000</Name>
+      <Description>The price is greater or equal to 2.000.000</Description>
     </OutputValue>
   </Output>
 </EstimateNet>
