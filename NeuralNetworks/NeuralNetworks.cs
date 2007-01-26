@@ -74,22 +74,62 @@ namespace OSDevGrp.NeuralNetworks
                 this.checkBoxEstimateNetUseBias.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _EstimateNet, "UseBias", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
                 this.textBoxEstimateNetErrorValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
                 this.textBoxEstimateNetEpochs.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-                this.comboBoxEstimateNetCategory.BeginUpdate();
-                this.comboBoxEstimateNetCategory.DataSource = _EstimateNet.InputCategories;
-                this.comboBoxEstimateNetCategory.DisplayMember = "Name";
-                this.comboBoxEstimateNetCategory.ValueMember = "This";
-                this.comboBoxEstimateNetCategory.EndUpdate();
-                if (this.comboBoxEstimateNetCategory.Items.Count > 0)
+                int width_groupboxes = 0, width = 0;
+                for (int i = 0; i < 5; i++)
                 {
-                    this.comboBoxEstimateNetCategory.SelectedIndex = 0;
-
-                    this.comboBoxEstimateNetValue.BeginUpdate();
-                    this.comboBoxEstimateNetValue.DataSource = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).InputValues;
-                    this.comboBoxEstimateNetValue.DisplayMember = "Name";
-                    this.comboBoxEstimateNetValue.ValueMember = "This";
-                    if (this.comboBoxEstimateNetValue.Items.Count > 0)
-                        this.comboBoxEstimateNetValue.SelectedItem = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).SelectedInputValue;
-                    this.comboBoxEstimateNetValue.EndUpdate();
+                    System.Windows.Forms.GroupBox groupbox = (System.Windows.Forms.GroupBox) this.groupBoxEstimateNetRunning.Controls["groupBoxEstimateNetCategory" + (i + 1).ToString()];
+                    if (_EstimateNet.InputCategories.Count > i)
+                    {
+                        groupbox.Text = _EstimateNet.InputCategories[i].Name;
+                        groupbox.Tag =  _EstimateNet.InputCategories[i];
+                        width = 0;
+                        for (int j = 0; j < 4; j++)
+                        {
+                            System.Windows.Forms.RadioButton radiobutton = (System.Windows.Forms.RadioButton) this.groupBoxEstimateNetRunning.Controls["groupBoxEstimateNetCategory" + (i + 1).ToString()].Controls["radioButtonEstimateNetInput" + (i + 1).ToString() + (j + 1).ToString()];
+                            if (_EstimateNet.InputCategories[i].InputValues.Count > j)
+                            {
+                                radiobutton.Text = _EstimateNet.InputCategories[i].InputValues[j].Name;
+                                radiobutton.Tag = _EstimateNet.InputCategories[i].InputValues[j];
+                                radiobutton.Click += new EventHandler(radioButtonEstimateNetInput_Click);
+                                if (_EstimateNet.InputCategories[i].SelectedInputValue == _EstimateNet.InputCategories[i].InputValues[j])
+                                    radiobutton.Checked = true;
+                                if (radiobutton.Size.Width > width)
+                                    width = radiobutton.Size.Width + 8;
+                                radiobutton.Click += new EventHandler(radioButtonEstimateNetInput_Click);
+                            }
+                            else
+                                radiobutton.Hide();
+                        }
+                        groupbox.Size = new System.Drawing.Size(width, groupbox.Size.Height);
+                        width_groupboxes += groupbox.Size.Width;
+                    }
+                    else
+                        groupbox.Hide();
+                }
+                this.groupBoxEstimateNetOutput.Dock = System.Windows.Forms.DockStyle.Left;
+                this.groupBoxEstimateNetOutput.Text = _EstimateNet.Output.Name;
+                width = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    System.Windows.Forms.CheckBox checkbox = (System.Windows.Forms.CheckBox) this.groupBoxEstimateNetOutput.Controls["checkBoxEstimateNetOutput" + (i + 1).ToString()];
+                    if (_EstimateNet.Output.OutputValues.Count > i)
+                    {
+                        checkbox.Text = _EstimateNet.Output.OutputValues[i].Name;
+                        checkbox.Tag = _EstimateNet.Output.OutputValues[i];
+                        if (checkbox.Size.Width > width)
+                            width = checkbox.Size.Width + 8;
+                        checkbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _EstimateNet.Output.OutputValues[i], "Checked", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                    }
+                    else
+                        checkbox.Hide();
+                }
+                this.groupBoxEstimateNetOutput.Size = new System.Drawing.Size(width, this.groupBoxEstimateNetOutput.Size.Height);
+                width_groupboxes += this.groupBoxEstimateNetOutput.Size.Width;
+                this.groupBoxEstimateNetOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+                if (width_groupboxes > this.Size.Width)
+                {
+                    int pct = ((width_groupboxes * 100) / this.Size.Width) + 5;
+                    this.Size = new System.Drawing.Size((this.Size.Width * pct) / 100, (this.Size.Height * pct) / 100);
                 }
                 this.timerTraining.Interval = 2500;
                 this.timerTraining.Enabled = true;
@@ -219,38 +259,31 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        private void comboBoxEstimateNetCategory_SelectedIndexChanged(object sender, EventArgs e)
+        private void radioButtonEstimateNetInput_Click(object sender, EventArgs e)
         {
             try
             {
-                this.comboBoxEstimateNetValue.BeginUpdate();
-                if (this.comboBoxEstimateNetValue.ValueMember.Length > 0)
-                    this.comboBoxEstimateNetValue.ValueMember = "";
-                this.comboBoxEstimateNetValue.DataSource = null;
-                if (this.comboBoxEstimateNetCategory.SelectedIndex >= 0)
+                if (sender is System.Windows.Forms.RadioButton)
                 {
-                    this.comboBoxEstimateNetValue.DataSource = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).InputValues;
-                    this.comboBoxEstimateNetValue.DisplayMember = "Name";
-                    this.comboBoxEstimateNetValue.ValueMember = "This";
-                    if (this.comboBoxEstimateNetValue.Items.Count > 0)
-                        this.comboBoxEstimateNetValue.SelectedItem = ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).SelectedInputValue;
-                }
-                this.comboBoxEstimateNetValue.EndUpdate();
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
-            }
-        }
-
-        private void comboBoxEstimateNetValue_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.comboBoxEstimateNetValue.ValueMember.Length > 0)
-                {
-                    if (this.comboBoxEstimateNetCategory.SelectedIndex >= 0)
-                        ((EstimateNetInputCategory) this.comboBoxEstimateNetCategory.SelectedValue).SelectedInputValue = (EstimateNetInputValue) this.comboBoxEstimateNetValue.SelectedValue;
+                    System.Windows.Forms.RadioButton radiobutton = (System.Windows.Forms.RadioButton) sender;
+                    if (radiobutton.Tag is EstimateNetInputValue)
+                    {
+                        if (radiobutton.Parent is System.Windows.Forms.GroupBox)
+                        {
+                            System.Windows.Forms.GroupBox groupbox = (System.Windows.Forms.GroupBox) radiobutton.Parent;
+                            if (groupbox.Tag is EstimateNetInputCategory)
+                            {
+                                ((EstimateNetInputCategory) groupbox.Tag).SelectedInputValue = (EstimateNetInputValue) radiobutton.Tag;
+                                EstimateNetOutput output = EstimateNet.Run();
+                                for (int i = 0; i < 5; i ++)
+                                {
+                                    System.Windows.Forms.CheckBox checkbox = (System.Windows.Forms.CheckBox) this.groupBoxEstimateNetOutput.Controls["checkBoxEstimateNetOutput" + (i + 1).ToString()];
+                                    foreach (System.Windows.Forms.Binding binding in checkbox.DataBindings)
+                                        binding.ReadValue();
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch (System.Exception ex)

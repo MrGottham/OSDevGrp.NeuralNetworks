@@ -74,9 +74,31 @@
             this.labelEstimateNetErrorValue = new System.Windows.Forms.Label();
             this.panelEstimateNetRunning = new System.Windows.Forms.Panel();
             this.groupBoxEstimateNetRunning = new System.Windows.Forms.GroupBox();
-            this.labelEstimateNetValue = new System.Windows.Forms.Label();
-            this.comboBoxEstimateNetCategory = new System.Windows.Forms.ComboBox();
-            this.labelEstimateNetCategory = new System.Windows.Forms.Label();
+            this.groupBoxEstimateNetCategory5 = new System.Windows.Forms.GroupBox();
+            this.radioButtonEstimateNetInput54 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput53 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput52 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput51 = new System.Windows.Forms.RadioButton();
+            this.groupBoxEstimateNetCategory4 = new System.Windows.Forms.GroupBox();
+            this.radioButtonEstimateNetInput44 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput43 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput42 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput41 = new System.Windows.Forms.RadioButton();
+            this.groupBoxEstimateNetCategory3 = new System.Windows.Forms.GroupBox();
+            this.radioButtonEstimateNetInput34 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput33 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput32 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput31 = new System.Windows.Forms.RadioButton();
+            this.groupBoxEstimateNetCategory2 = new System.Windows.Forms.GroupBox();
+            this.radioButtonEstimateNetInput24 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput23 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput22 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput21 = new System.Windows.Forms.RadioButton();
+            this.groupBoxEstimateNetCategory1 = new System.Windows.Forms.GroupBox();
+            this.radioButtonEstimateNetInput14 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput13 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput12 = new System.Windows.Forms.RadioButton();
+            this.radioButtonEstimateNetInput11 = new System.Windows.Forms.RadioButton();
             this.panelEstimateNetConfiguration = new System.Windows.Forms.Panel();
             this.groupBoxEstimateNetConfiguration = new System.Windows.Forms.GroupBox();
             this.checkBoxEstimateNetUseBias = new System.Windows.Forms.CheckBox();
@@ -85,7 +107,12 @@
             this.textBoxEstimateNetLarningRate = new System.Windows.Forms.TextBox();
             this.labelEstimateNetLearningRate = new System.Windows.Forms.Label();
             this.timerTraining = new System.Windows.Forms.Timer(this.components);
-            this.comboBoxEstimateNetValue = new System.Windows.Forms.ComboBox();
+            this.groupBoxEstimateNetOutput = new System.Windows.Forms.GroupBox();
+            this.checkBoxEstimateNetOutput1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput4 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput5 = new System.Windows.Forms.CheckBox();
             groupBoxXOrNetRunning = new System.Windows.Forms.GroupBox();
             labelEstimateNetEpochs = new System.Windows.Forms.Label();
             groupBoxXOrNetRunning.SuspendLayout();
@@ -106,8 +133,14 @@
             this.panelEstimateNetTrainingValues.SuspendLayout();
             this.panelEstimateNetRunning.SuspendLayout();
             this.groupBoxEstimateNetRunning.SuspendLayout();
+            this.groupBoxEstimateNetCategory5.SuspendLayout();
+            this.groupBoxEstimateNetCategory4.SuspendLayout();
+            this.groupBoxEstimateNetCategory3.SuspendLayout();
+            this.groupBoxEstimateNetCategory2.SuspendLayout();
+            this.groupBoxEstimateNetCategory1.SuspendLayout();
             this.panelEstimateNetConfiguration.SuspendLayout();
             this.groupBoxEstimateNetConfiguration.SuspendLayout();
+            this.groupBoxEstimateNetOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxXOrNetRunning
@@ -473,7 +506,7 @@
             this.panelEstimateNetTraining.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEstimateNetTraining.Location = new System.Drawing.Point(3, 101);
             this.panelEstimateNetTraining.Name = "panelEstimateNetTraining";
-            this.panelEstimateNetTraining.Size = new System.Drawing.Size(578, 172);
+            this.panelEstimateNetTraining.Size = new System.Drawing.Size(578, 142);
             this.panelEstimateNetTraining.TabIndex = 1;
             // 
             // groupBoxEstimateNetTraining
@@ -482,7 +515,7 @@
             this.groupBoxEstimateNetTraining.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxEstimateNetTraining.Location = new System.Drawing.Point(0, 0);
             this.groupBoxEstimateNetTraining.Name = "groupBoxEstimateNetTraining";
-            this.groupBoxEstimateNetTraining.Size = new System.Drawing.Size(578, 172);
+            this.groupBoxEstimateNetTraining.Size = new System.Drawing.Size(578, 142);
             this.groupBoxEstimateNetTraining.TabIndex = 0;
             this.groupBoxEstimateNetTraining.TabStop = false;
             this.groupBoxEstimateNetTraining.Text = "Training";
@@ -530,51 +563,316 @@
             // 
             this.panelEstimateNetRunning.Controls.Add(this.groupBoxEstimateNetRunning);
             this.panelEstimateNetRunning.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelEstimateNetRunning.Location = new System.Drawing.Point(3, 273);
+            this.panelEstimateNetRunning.Location = new System.Drawing.Point(3, 243);
             this.panelEstimateNetRunning.Name = "panelEstimateNetRunning";
-            this.panelEstimateNetRunning.Size = new System.Drawing.Size(578, 120);
+            this.panelEstimateNetRunning.Size = new System.Drawing.Size(578, 150);
             this.panelEstimateNetRunning.TabIndex = 2;
             // 
             // groupBoxEstimateNetRunning
             // 
-            this.groupBoxEstimateNetRunning.Controls.Add(this.comboBoxEstimateNetValue);
-            this.groupBoxEstimateNetRunning.Controls.Add(this.labelEstimateNetValue);
-            this.groupBoxEstimateNetRunning.Controls.Add(this.comboBoxEstimateNetCategory);
-            this.groupBoxEstimateNetRunning.Controls.Add(this.labelEstimateNetCategory);
+            this.groupBoxEstimateNetRunning.Controls.Add(this.groupBoxEstimateNetOutput);
+            this.groupBoxEstimateNetRunning.Controls.Add(this.groupBoxEstimateNetCategory5);
+            this.groupBoxEstimateNetRunning.Controls.Add(this.groupBoxEstimateNetCategory4);
+            this.groupBoxEstimateNetRunning.Controls.Add(this.groupBoxEstimateNetCategory3);
+            this.groupBoxEstimateNetRunning.Controls.Add(this.groupBoxEstimateNetCategory2);
+            this.groupBoxEstimateNetRunning.Controls.Add(this.groupBoxEstimateNetCategory1);
             this.groupBoxEstimateNetRunning.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxEstimateNetRunning.Location = new System.Drawing.Point(0, 0);
             this.groupBoxEstimateNetRunning.Name = "groupBoxEstimateNetRunning";
-            this.groupBoxEstimateNetRunning.Size = new System.Drawing.Size(578, 120);
+            this.groupBoxEstimateNetRunning.Size = new System.Drawing.Size(578, 150);
             this.groupBoxEstimateNetRunning.TabIndex = 0;
             this.groupBoxEstimateNetRunning.TabStop = false;
             this.groupBoxEstimateNetRunning.Text = "Running";
             // 
-            // labelEstimateNetValue
+            // groupBoxEstimateNetCategory5
             // 
-            this.labelEstimateNetValue.AutoSize = true;
-            this.labelEstimateNetValue.Location = new System.Drawing.Point(6, 49);
-            this.labelEstimateNetValue.Name = "labelEstimateNetValue";
-            this.labelEstimateNetValue.Size = new System.Drawing.Size(34, 13);
-            this.labelEstimateNetValue.TabIndex = 2;
-            this.labelEstimateNetValue.Text = "Value";
+            this.groupBoxEstimateNetCategory5.Controls.Add(this.radioButtonEstimateNetInput54);
+            this.groupBoxEstimateNetCategory5.Controls.Add(this.radioButtonEstimateNetInput53);
+            this.groupBoxEstimateNetCategory5.Controls.Add(this.radioButtonEstimateNetInput52);
+            this.groupBoxEstimateNetCategory5.Controls.Add(this.radioButtonEstimateNetInput51);
+            this.groupBoxEstimateNetCategory5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBoxEstimateNetCategory5.Location = new System.Drawing.Point(323, 16);
+            this.groupBoxEstimateNetCategory5.Name = "groupBoxEstimateNetCategory5";
+            this.groupBoxEstimateNetCategory5.Size = new System.Drawing.Size(80, 131);
+            this.groupBoxEstimateNetCategory5.TabIndex = 4;
+            this.groupBoxEstimateNetCategory5.TabStop = false;
+            this.groupBoxEstimateNetCategory5.Text = "Category";
             // 
-            // comboBoxEstimateNetCategory
+            // radioButtonEstimateNetInput54
             // 
-            this.comboBoxEstimateNetCategory.FormattingEnabled = true;
-            this.comboBoxEstimateNetCategory.Location = new System.Drawing.Point(61, 19);
-            this.comboBoxEstimateNetCategory.Name = "comboBoxEstimateNetCategory";
-            this.comboBoxEstimateNetCategory.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxEstimateNetCategory.TabIndex = 1;
-            this.comboBoxEstimateNetCategory.SelectedIndexChanged += new System.EventHandler(this.comboBoxEstimateNetCategory_SelectedIndexChanged);
+            this.radioButtonEstimateNetInput54.AutoSize = true;
+            this.radioButtonEstimateNetInput54.Location = new System.Drawing.Point(6, 88);
+            this.radioButtonEstimateNetInput54.Name = "radioButtonEstimateNetInput54";
+            this.radioButtonEstimateNetInput54.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput54.TabIndex = 3;
+            this.radioButtonEstimateNetInput54.TabStop = true;
+            this.radioButtonEstimateNetInput54.Text = "Value";
+            this.radioButtonEstimateNetInput54.UseVisualStyleBackColor = true;
             // 
-            // labelEstimateNetCategory
+            // radioButtonEstimateNetInput53
             // 
-            this.labelEstimateNetCategory.AutoSize = true;
-            this.labelEstimateNetCategory.Location = new System.Drawing.Point(6, 22);
-            this.labelEstimateNetCategory.Name = "labelEstimateNetCategory";
-            this.labelEstimateNetCategory.Size = new System.Drawing.Size(49, 13);
-            this.labelEstimateNetCategory.TabIndex = 0;
-            this.labelEstimateNetCategory.Text = "Category";
+            this.radioButtonEstimateNetInput53.AutoSize = true;
+            this.radioButtonEstimateNetInput53.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonEstimateNetInput53.Name = "radioButtonEstimateNetInput53";
+            this.radioButtonEstimateNetInput53.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput53.TabIndex = 2;
+            this.radioButtonEstimateNetInput53.TabStop = true;
+            this.radioButtonEstimateNetInput53.Text = "Value";
+            this.radioButtonEstimateNetInput53.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput52
+            // 
+            this.radioButtonEstimateNetInput52.AutoSize = true;
+            this.radioButtonEstimateNetInput52.Location = new System.Drawing.Point(6, 43);
+            this.radioButtonEstimateNetInput52.Name = "radioButtonEstimateNetInput52";
+            this.radioButtonEstimateNetInput52.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput52.TabIndex = 1;
+            this.radioButtonEstimateNetInput52.TabStop = true;
+            this.radioButtonEstimateNetInput52.Text = "Value";
+            this.radioButtonEstimateNetInput52.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput51
+            // 
+            this.radioButtonEstimateNetInput51.AutoSize = true;
+            this.radioButtonEstimateNetInput51.Location = new System.Drawing.Point(6, 19);
+            this.radioButtonEstimateNetInput51.Name = "radioButtonEstimateNetInput51";
+            this.radioButtonEstimateNetInput51.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput51.TabIndex = 0;
+            this.radioButtonEstimateNetInput51.TabStop = true;
+            this.radioButtonEstimateNetInput51.Text = "Value";
+            this.radioButtonEstimateNetInput51.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxEstimateNetCategory4
+            // 
+            this.groupBoxEstimateNetCategory4.Controls.Add(this.radioButtonEstimateNetInput44);
+            this.groupBoxEstimateNetCategory4.Controls.Add(this.radioButtonEstimateNetInput43);
+            this.groupBoxEstimateNetCategory4.Controls.Add(this.radioButtonEstimateNetInput42);
+            this.groupBoxEstimateNetCategory4.Controls.Add(this.radioButtonEstimateNetInput41);
+            this.groupBoxEstimateNetCategory4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBoxEstimateNetCategory4.Location = new System.Drawing.Point(243, 16);
+            this.groupBoxEstimateNetCategory4.Name = "groupBoxEstimateNetCategory4";
+            this.groupBoxEstimateNetCategory4.Size = new System.Drawing.Size(80, 131);
+            this.groupBoxEstimateNetCategory4.TabIndex = 3;
+            this.groupBoxEstimateNetCategory4.TabStop = false;
+            this.groupBoxEstimateNetCategory4.Text = "Category";
+            // 
+            // radioButtonEstimateNetInput44
+            // 
+            this.radioButtonEstimateNetInput44.AutoSize = true;
+            this.radioButtonEstimateNetInput44.Location = new System.Drawing.Point(6, 91);
+            this.radioButtonEstimateNetInput44.Name = "radioButtonEstimateNetInput44";
+            this.radioButtonEstimateNetInput44.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput44.TabIndex = 3;
+            this.radioButtonEstimateNetInput44.TabStop = true;
+            this.radioButtonEstimateNetInput44.Text = "Value";
+            this.radioButtonEstimateNetInput44.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput43
+            // 
+            this.radioButtonEstimateNetInput43.AutoSize = true;
+            this.radioButtonEstimateNetInput43.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonEstimateNetInput43.Name = "radioButtonEstimateNetInput43";
+            this.radioButtonEstimateNetInput43.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput43.TabIndex = 2;
+            this.radioButtonEstimateNetInput43.TabStop = true;
+            this.radioButtonEstimateNetInput43.Text = "Value";
+            this.radioButtonEstimateNetInput43.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput42
+            // 
+            this.radioButtonEstimateNetInput42.AutoSize = true;
+            this.radioButtonEstimateNetInput42.Location = new System.Drawing.Point(6, 43);
+            this.radioButtonEstimateNetInput42.Name = "radioButtonEstimateNetInput42";
+            this.radioButtonEstimateNetInput42.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput42.TabIndex = 1;
+            this.radioButtonEstimateNetInput42.TabStop = true;
+            this.radioButtonEstimateNetInput42.Text = "Value";
+            this.radioButtonEstimateNetInput42.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput41
+            // 
+            this.radioButtonEstimateNetInput41.AutoSize = true;
+            this.radioButtonEstimateNetInput41.Location = new System.Drawing.Point(6, 19);
+            this.radioButtonEstimateNetInput41.Name = "radioButtonEstimateNetInput41";
+            this.radioButtonEstimateNetInput41.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput41.TabIndex = 0;
+            this.radioButtonEstimateNetInput41.TabStop = true;
+            this.radioButtonEstimateNetInput41.Text = "Value";
+            this.radioButtonEstimateNetInput41.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxEstimateNetCategory3
+            // 
+            this.groupBoxEstimateNetCategory3.Controls.Add(this.radioButtonEstimateNetInput34);
+            this.groupBoxEstimateNetCategory3.Controls.Add(this.radioButtonEstimateNetInput33);
+            this.groupBoxEstimateNetCategory3.Controls.Add(this.radioButtonEstimateNetInput32);
+            this.groupBoxEstimateNetCategory3.Controls.Add(this.radioButtonEstimateNetInput31);
+            this.groupBoxEstimateNetCategory3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBoxEstimateNetCategory3.Location = new System.Drawing.Point(163, 16);
+            this.groupBoxEstimateNetCategory3.Name = "groupBoxEstimateNetCategory3";
+            this.groupBoxEstimateNetCategory3.Size = new System.Drawing.Size(80, 131);
+            this.groupBoxEstimateNetCategory3.TabIndex = 2;
+            this.groupBoxEstimateNetCategory3.TabStop = false;
+            this.groupBoxEstimateNetCategory3.Text = "Category";
+            // 
+            // radioButtonEstimateNetInput34
+            // 
+            this.radioButtonEstimateNetInput34.AutoSize = true;
+            this.radioButtonEstimateNetInput34.Location = new System.Drawing.Point(6, 88);
+            this.radioButtonEstimateNetInput34.Name = "radioButtonEstimateNetInput34";
+            this.radioButtonEstimateNetInput34.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput34.TabIndex = 3;
+            this.radioButtonEstimateNetInput34.TabStop = true;
+            this.radioButtonEstimateNetInput34.Text = "Value";
+            this.radioButtonEstimateNetInput34.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput33
+            // 
+            this.radioButtonEstimateNetInput33.AutoSize = true;
+            this.radioButtonEstimateNetInput33.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonEstimateNetInput33.Name = "radioButtonEstimateNetInput33";
+            this.radioButtonEstimateNetInput33.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput33.TabIndex = 2;
+            this.radioButtonEstimateNetInput33.TabStop = true;
+            this.radioButtonEstimateNetInput33.Text = "Value";
+            this.radioButtonEstimateNetInput33.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput32
+            // 
+            this.radioButtonEstimateNetInput32.AutoSize = true;
+            this.radioButtonEstimateNetInput32.Location = new System.Drawing.Point(6, 42);
+            this.radioButtonEstimateNetInput32.Name = "radioButtonEstimateNetInput32";
+            this.radioButtonEstimateNetInput32.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput32.TabIndex = 1;
+            this.radioButtonEstimateNetInput32.TabStop = true;
+            this.radioButtonEstimateNetInput32.Text = "Value";
+            this.radioButtonEstimateNetInput32.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput31
+            // 
+            this.radioButtonEstimateNetInput31.AutoSize = true;
+            this.radioButtonEstimateNetInput31.Location = new System.Drawing.Point(6, 19);
+            this.radioButtonEstimateNetInput31.Name = "radioButtonEstimateNetInput31";
+            this.radioButtonEstimateNetInput31.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput31.TabIndex = 0;
+            this.radioButtonEstimateNetInput31.TabStop = true;
+            this.radioButtonEstimateNetInput31.Text = "Value";
+            this.radioButtonEstimateNetInput31.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxEstimateNetCategory2
+            // 
+            this.groupBoxEstimateNetCategory2.Controls.Add(this.radioButtonEstimateNetInput24);
+            this.groupBoxEstimateNetCategory2.Controls.Add(this.radioButtonEstimateNetInput23);
+            this.groupBoxEstimateNetCategory2.Controls.Add(this.radioButtonEstimateNetInput22);
+            this.groupBoxEstimateNetCategory2.Controls.Add(this.radioButtonEstimateNetInput21);
+            this.groupBoxEstimateNetCategory2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBoxEstimateNetCategory2.Location = new System.Drawing.Point(83, 16);
+            this.groupBoxEstimateNetCategory2.Name = "groupBoxEstimateNetCategory2";
+            this.groupBoxEstimateNetCategory2.Size = new System.Drawing.Size(80, 131);
+            this.groupBoxEstimateNetCategory2.TabIndex = 1;
+            this.groupBoxEstimateNetCategory2.TabStop = false;
+            this.groupBoxEstimateNetCategory2.Text = "Category";
+            // 
+            // radioButtonEstimateNetInput24
+            // 
+            this.radioButtonEstimateNetInput24.AutoSize = true;
+            this.radioButtonEstimateNetInput24.Location = new System.Drawing.Point(6, 88);
+            this.radioButtonEstimateNetInput24.Name = "radioButtonEstimateNetInput24";
+            this.radioButtonEstimateNetInput24.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput24.TabIndex = 3;
+            this.radioButtonEstimateNetInput24.TabStop = true;
+            this.radioButtonEstimateNetInput24.Text = "Value";
+            this.radioButtonEstimateNetInput24.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput23
+            // 
+            this.radioButtonEstimateNetInput23.AutoSize = true;
+            this.radioButtonEstimateNetInput23.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonEstimateNetInput23.Name = "radioButtonEstimateNetInput23";
+            this.radioButtonEstimateNetInput23.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput23.TabIndex = 2;
+            this.radioButtonEstimateNetInput23.TabStop = true;
+            this.radioButtonEstimateNetInput23.Text = "Value";
+            this.radioButtonEstimateNetInput23.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput22
+            // 
+            this.radioButtonEstimateNetInput22.AutoSize = true;
+            this.radioButtonEstimateNetInput22.Location = new System.Drawing.Point(6, 42);
+            this.radioButtonEstimateNetInput22.Name = "radioButtonEstimateNetInput22";
+            this.radioButtonEstimateNetInput22.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput22.TabIndex = 1;
+            this.radioButtonEstimateNetInput22.TabStop = true;
+            this.radioButtonEstimateNetInput22.Text = "Value";
+            this.radioButtonEstimateNetInput22.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput21
+            // 
+            this.radioButtonEstimateNetInput21.AutoSize = true;
+            this.radioButtonEstimateNetInput21.Location = new System.Drawing.Point(6, 19);
+            this.radioButtonEstimateNetInput21.Name = "radioButtonEstimateNetInput21";
+            this.radioButtonEstimateNetInput21.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput21.TabIndex = 0;
+            this.radioButtonEstimateNetInput21.TabStop = true;
+            this.radioButtonEstimateNetInput21.Text = "Value";
+            this.radioButtonEstimateNetInput21.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxEstimateNetCategory1
+            // 
+            this.groupBoxEstimateNetCategory1.Controls.Add(this.radioButtonEstimateNetInput14);
+            this.groupBoxEstimateNetCategory1.Controls.Add(this.radioButtonEstimateNetInput13);
+            this.groupBoxEstimateNetCategory1.Controls.Add(this.radioButtonEstimateNetInput12);
+            this.groupBoxEstimateNetCategory1.Controls.Add(this.radioButtonEstimateNetInput11);
+            this.groupBoxEstimateNetCategory1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBoxEstimateNetCategory1.Location = new System.Drawing.Point(3, 16);
+            this.groupBoxEstimateNetCategory1.Name = "groupBoxEstimateNetCategory1";
+            this.groupBoxEstimateNetCategory1.Size = new System.Drawing.Size(80, 131);
+            this.groupBoxEstimateNetCategory1.TabIndex = 0;
+            this.groupBoxEstimateNetCategory1.TabStop = false;
+            this.groupBoxEstimateNetCategory1.Text = "Category";
+            // 
+            // radioButtonEstimateNetInput14
+            // 
+            this.radioButtonEstimateNetInput14.AutoSize = true;
+            this.radioButtonEstimateNetInput14.Location = new System.Drawing.Point(6, 91);
+            this.radioButtonEstimateNetInput14.Name = "radioButtonEstimateNetInput14";
+            this.radioButtonEstimateNetInput14.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput14.TabIndex = 3;
+            this.radioButtonEstimateNetInput14.TabStop = true;
+            this.radioButtonEstimateNetInput14.Text = "Value";
+            this.radioButtonEstimateNetInput14.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput13
+            // 
+            this.radioButtonEstimateNetInput13.AutoSize = true;
+            this.radioButtonEstimateNetInput13.Location = new System.Drawing.Point(6, 67);
+            this.radioButtonEstimateNetInput13.Name = "radioButtonEstimateNetInput13";
+            this.radioButtonEstimateNetInput13.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput13.TabIndex = 2;
+            this.radioButtonEstimateNetInput13.TabStop = true;
+            this.radioButtonEstimateNetInput13.Text = "Value";
+            this.radioButtonEstimateNetInput13.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput12
+            // 
+            this.radioButtonEstimateNetInput12.AutoSize = true;
+            this.radioButtonEstimateNetInput12.Location = new System.Drawing.Point(6, 43);
+            this.radioButtonEstimateNetInput12.Name = "radioButtonEstimateNetInput12";
+            this.radioButtonEstimateNetInput12.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput12.TabIndex = 1;
+            this.radioButtonEstimateNetInput12.TabStop = true;
+            this.radioButtonEstimateNetInput12.Text = "Value";
+            this.radioButtonEstimateNetInput12.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonEstimateNetInput11
+            // 
+            this.radioButtonEstimateNetInput11.AutoSize = true;
+            this.radioButtonEstimateNetInput11.Location = new System.Drawing.Point(6, 19);
+            this.radioButtonEstimateNetInput11.Name = "radioButtonEstimateNetInput11";
+            this.radioButtonEstimateNetInput11.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonEstimateNetInput11.TabIndex = 0;
+            this.radioButtonEstimateNetInput11.TabStop = true;
+            this.radioButtonEstimateNetInput11.Text = "Value";
+            this.radioButtonEstimateNetInput11.UseVisualStyleBackColor = true;
             // 
             // panelEstimateNetConfiguration
             // 
@@ -648,14 +946,75 @@
             // 
             this.timerTraining.Tick += new System.EventHandler(this.timerTraining_Tick);
             // 
-            // comboBoxEstimateNetValue
+            // groupBoxEstimateNetOutput
             // 
-            this.comboBoxEstimateNetValue.FormattingEnabled = true;
-            this.comboBoxEstimateNetValue.Location = new System.Drawing.Point(61, 46);
-            this.comboBoxEstimateNetValue.Name = "comboBoxEstimateNetValue";
-            this.comboBoxEstimateNetValue.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxEstimateNetValue.TabIndex = 3;
-            this.comboBoxEstimateNetValue.SelectedIndexChanged += new System.EventHandler(this.comboBoxEstimateNetValue_SelectedIndexChanged);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput5);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput4);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput3);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput2);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput1);
+            this.groupBoxEstimateNetOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxEstimateNetOutput.Location = new System.Drawing.Point(403, 16);
+            this.groupBoxEstimateNetOutput.Name = "groupBoxEstimateNetOutput";
+            this.groupBoxEstimateNetOutput.Size = new System.Drawing.Size(172, 131);
+            this.groupBoxEstimateNetOutput.TabIndex = 5;
+            this.groupBoxEstimateNetOutput.TabStop = false;
+            this.groupBoxEstimateNetOutput.Text = "Output";
+            // 
+            // checkBoxEstimateNetOutput1
+            // 
+            this.checkBoxEstimateNetOutput1.AutoSize = true;
+            this.checkBoxEstimateNetOutput1.Enabled = false;
+            this.checkBoxEstimateNetOutput1.Location = new System.Drawing.Point(6, 20);
+            this.checkBoxEstimateNetOutput1.Name = "checkBoxEstimateNetOutput1";
+            this.checkBoxEstimateNetOutput1.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput1.TabIndex = 0;
+            this.checkBoxEstimateNetOutput1.Text = "Value";
+            this.checkBoxEstimateNetOutput1.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput2
+            // 
+            this.checkBoxEstimateNetOutput2.AutoSize = true;
+            this.checkBoxEstimateNetOutput2.Enabled = false;
+            this.checkBoxEstimateNetOutput2.Location = new System.Drawing.Point(6, 43);
+            this.checkBoxEstimateNetOutput2.Name = "checkBoxEstimateNetOutput2";
+            this.checkBoxEstimateNetOutput2.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput2.TabIndex = 1;
+            this.checkBoxEstimateNetOutput2.Text = "Value";
+            this.checkBoxEstimateNetOutput2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput3
+            // 
+            this.checkBoxEstimateNetOutput3.AutoSize = true;
+            this.checkBoxEstimateNetOutput3.Enabled = false;
+            this.checkBoxEstimateNetOutput3.Location = new System.Drawing.Point(6, 66);
+            this.checkBoxEstimateNetOutput3.Name = "checkBoxEstimateNetOutput3";
+            this.checkBoxEstimateNetOutput3.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput3.TabIndex = 2;
+            this.checkBoxEstimateNetOutput3.Text = "Value";
+            this.checkBoxEstimateNetOutput3.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput4
+            // 
+            this.checkBoxEstimateNetOutput4.AutoSize = true;
+            this.checkBoxEstimateNetOutput4.Enabled = false;
+            this.checkBoxEstimateNetOutput4.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxEstimateNetOutput4.Name = "checkBoxEstimateNetOutput4";
+            this.checkBoxEstimateNetOutput4.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput4.TabIndex = 3;
+            this.checkBoxEstimateNetOutput4.Text = "Value";
+            this.checkBoxEstimateNetOutput4.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput5
+            // 
+            this.checkBoxEstimateNetOutput5.AutoSize = true;
+            this.checkBoxEstimateNetOutput5.Enabled = false;
+            this.checkBoxEstimateNetOutput5.Location = new System.Drawing.Point(6, 111);
+            this.checkBoxEstimateNetOutput5.Name = "checkBoxEstimateNetOutput5";
+            this.checkBoxEstimateNetOutput5.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput5.TabIndex = 4;
+            this.checkBoxEstimateNetOutput5.Text = "Value";
+            this.checkBoxEstimateNetOutput5.UseVisualStyleBackColor = true;
             // 
             // NeuralNetworks
             // 
@@ -691,10 +1050,21 @@
             this.panelEstimateNetTrainingValues.PerformLayout();
             this.panelEstimateNetRunning.ResumeLayout(false);
             this.groupBoxEstimateNetRunning.ResumeLayout(false);
-            this.groupBoxEstimateNetRunning.PerformLayout();
+            this.groupBoxEstimateNetCategory5.ResumeLayout(false);
+            this.groupBoxEstimateNetCategory5.PerformLayout();
+            this.groupBoxEstimateNetCategory4.ResumeLayout(false);
+            this.groupBoxEstimateNetCategory4.PerformLayout();
+            this.groupBoxEstimateNetCategory3.ResumeLayout(false);
+            this.groupBoxEstimateNetCategory3.PerformLayout();
+            this.groupBoxEstimateNetCategory2.ResumeLayout(false);
+            this.groupBoxEstimateNetCategory2.PerformLayout();
+            this.groupBoxEstimateNetCategory1.ResumeLayout(false);
+            this.groupBoxEstimateNetCategory1.PerformLayout();
             this.panelEstimateNetConfiguration.ResumeLayout(false);
             this.groupBoxEstimateNetConfiguration.ResumeLayout(false);
             this.groupBoxEstimateNetConfiguration.PerformLayout();
+            this.groupBoxEstimateNetOutput.ResumeLayout(false);
+            this.groupBoxEstimateNetOutput.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -752,10 +1122,37 @@
         private System.Windows.Forms.TextBox textBoxEstimateNetEpochs;
         private System.Windows.Forms.Panel panelEstimateNetRunning;
         private System.Windows.Forms.GroupBox groupBoxEstimateNetRunning;
-        private System.Windows.Forms.ComboBox comboBoxEstimateNetCategory;
-        private System.Windows.Forms.Label labelEstimateNetCategory;
-        private System.Windows.Forms.Label labelEstimateNetValue;
-        private System.Windows.Forms.ComboBox comboBoxEstimateNetValue;
+        private System.Windows.Forms.GroupBox groupBoxEstimateNetCategory1;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput11;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput12;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput13;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput14;
+        private System.Windows.Forms.GroupBox groupBoxEstimateNetCategory2;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput24;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput23;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput22;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput21;
+        private System.Windows.Forms.GroupBox groupBoxEstimateNetCategory3;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput34;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput33;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput32;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput31;
+        private System.Windows.Forms.GroupBox groupBoxEstimateNetCategory4;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput44;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput43;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput42;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput41;
+        private System.Windows.Forms.GroupBox groupBoxEstimateNetCategory5;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput54;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput53;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput52;
+        private System.Windows.Forms.RadioButton radioButtonEstimateNetInput51;
+        private System.Windows.Forms.GroupBox groupBoxEstimateNetOutput;
+        private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput1;
+        private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput2;
+        private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput5;
+        private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput4;
+        private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput3;
     }
 }
 

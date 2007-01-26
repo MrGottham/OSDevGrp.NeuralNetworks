@@ -1,109 +1,139 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <EstimateNet>
+  <Definition>
+    <Neurons>5</Neurons>
+    <Neurons>5</Neurons>
+  </Definition>
   <InputCategories>
     <InputCategory>
-      <Name>Area</Name>
-      <Description>The areal of the house</Description>
+      <Name>Conditions of employment</Name>
+      <Description>Conditions of employment for the applicant</Description>
       <InputValue>
-        <Name>&lt;= 50 m²</Name>
-        <Description>The areal is lower or equal to 50 m²</Description>
+        <Name>Unemployed</Name>
+        <Description>Unemployed</Description>
       </InputValue>
       <InputValue>
-        <Name>51 - 90 m²</Name>
-        <Description>The areal is between 51 and 90 m²</Description>
+        <Name>Pensioner, unskilled, trainee</Name>
+        <Description>Pensioner, unskilled or trainee</Description>
       </InputValue>
       <InputValue>
-        <Name>91 - 110 m²</Name>
-        <Description>The areal is between 91 and 110 m²</Description>
+        <Name>Office worker, skilled</Name>
+        <Description>Office worker or skilled</Description>
       </InputValue>
       <InputValue>
-        <Name>111 - 130 m²</Name>
-        <Description>The areal is between 111 and 130 m²</Description>
-      </InputValue>
-      <InputValue>
-        <Name>131 - 150 m²</Name>
-        <Description>The areal is between 131 and 150 m²</Description>
-      </InputValue>
-      <InputValue>
-        <Name>151 - 170 m²</Name>
-        <Description>The areal is between 151 and 170 m²</Description>
-      </InputValue>
-      <InputValue>
-        <Name>171 - 190 m²</Name>
-        <Description>The areal is between 171 and 190 m²</Description>
-      </InputValue>
-      <InputValue>
-        <Name>&gt;= 191 m²</Name>
-        <Description>The areal is greater or equal to 190 m²</Description>
+        <Name>Leader, manager, boss</Name>
+        <Description>Leader, manager or boss</Description>
       </InputValue>
     </InputCategory>
     <InputCategory>
-      <Name>Rooms</Name>
-      <Description>The number of rooms in the house</Description>
+      <Name>Annual income</Name>
+      <Description>Annual income for the applicant</Description>
       <InputValue>
-        <Name>&lt; 3</Name>
-        <Description>The house has less then 3 rooms</Description>
+        <Name>0 - 169.999</Name>
+        <Description>Annual income between 0 and 169.999</Description>
       </InputValue>
       <InputValue>
-        <Name>3</Name>
-        <Description>The house has 3 rooms</Description>
+        <Name>170.000 - 219.999</Name>
+        <Description>Annual income between 170.000 and 219.999</Description>
       </InputValue>
       <InputValue>
-        <Name>4</Name>
-        <Description>The house has 4 rooms</Description>
+        <Name>220.000 - 324.999</Name>
+        <Description>Annual income between 220.000 and 324.999</Description>
       </InputValue>
       <InputValue>
-        <Name>5</Name>
-        <Description>The house has 5 rooms</Description>
+        <Name>&gt;= 325.000</Name>
+        <Description>Annual income greater than or equal to 325.000</Description>
+      </InputValue>
+    </InputCategory>
+    <InputCategory>
+      <Name>Age</Name>
+      <Description>The applicant's age</Description>
+      <InputValue>
+        <Name>&gt; 70</Name>
+        <Description>Applicant is older than 70</Description>
       </InputValue>
       <InputValue>
-        <Name>6</Name>
-        <Description>The house has 6 rooms</Description>
+        <Name>60 - 70, 0 - 24</Name>
+        <Description>Applicant is between 60 and 70 or between 0 and 24</Description>
       </InputValue>
       <InputValue>
-        <Name>&gt; 6</Name>
-        <Description>The house has more then 6 rooms</Description>
+        <Name>25 - 44</Name>
+        <Description>Applicant is between 25 and 44</Description>
+      </InputValue>
+      <InputValue>
+        <Name>45 - 59</Name>
+        <Description>Applicant is between 45 and 59</Description>
+      </InputValue>
+    </InputCategory>
+    <InputCategory>
+      <Name>Housing conditions</Name>
+      <Description>Housing conditions for the applicant</Description>
+      <InputValue>
+        <Name>Room, CO-address</Name>
+        <Description>Room or CO-address</Description>
+      </InputValue>
+      <InputValue>
+        <Name>Tenant, living at home</Name>
+        <Description>Tenant og living at home</Description>
+      </InputValue>
+      <InputValue>
+        <Name>Own a part</Name>
+        <Description>Own a part of the house</Description>
+      </InputValue>
+      <InputValue>
+        <Name>Own complete</Name>
+        <Description>Own the house complete</Description>
+      </InputValue>
+    </InputCategory>
+    <InputCategory>
+      <Name>Underpayment of tax</Name>
+      <Description>Underpayment of tax</Description>
+      <InputValue>
+        <Name>&gt; 24.000</Name>
+        <Description>The underpayment of tax is greater than 24.000</Description>
+      </InputValue>
+      <InputValue>
+        <Name>12.000 - 24.000</Name>
+        <Description>The underpayment of tax is between 12.000 and 24.000</Description>
+      </InputValue>
+      <InputValue>
+        <Name>0 - 12.000</Name>
+        <Description>The underpayment of tax is between 0 and 12.000</Description>
+      </InputValue>
+      <InputValue>
+        <Name>No underpament of tax</Name>
+        <Description>There is no underpament of tax</Description>
       </InputValue>
     </InputCategory>
   </InputCategories>
   <Output>
-    <Name>Price</Name>
-    <Description>The price of the house</Description>
+    <Name>Score</Name>
+    <Description>The score of the applicant</Description>
     <OutputValue>
-      <Name>&lt; 250.000</Name>
-      <Description>The price is lower than 250.000</Description>
+      <Name>0 - 20</Name>
+      <Description>The applicant score is between 0 and 25</Description>
     </OutputValue>
     <OutputValue>
-      <Name>250.000 - 499.999</Name>
-      <Description>The price is between 250.000 and 499.999</Description>
+      <Name>21 - 40</Name>
+      <Description>The applicant score is between 21 and 40</Description>
     </OutputValue>
     <OutputValue>
-      <Name>500.000 - 749.999</Name>
-      <Description>The price is between 500.000 and 749.999</Description>
+      <Name>41 - 60</Name>
+      <Description>The applicant score is between 41 and 60</Description>
     </OutputValue>
     <OutputValue>
-      <Name>750.000 - 999.999</Name>
-      <Description>The price is between 750.000 and 999.999</Description>
+      <Name>61 - 80</Name>
+      <Description>The applicant score is between 61 and 80</Description>
     </OutputValue>
     <OutputValue>
-      <Name>1.000.000 - 1.249.999</Name>
-      <Description>The price is between 1.000.000 and 1.249.999</Description>
-    </OutputValue>
-    <OutputValue>
-      <Name>1.250.000 - 1.499.999</Name>
-      <Description>The price is between 1.250.000 and 1.499.999</Description>
-    </OutputValue>
-    <OutputValue>
-      <Name>1.500.000 - 1.749.999</Name>
-      <Description>The price is between 1.500.000 and 1.749.999</Description>
-    </OutputValue>
-    <OutputValue>
-      <Name>1.750.000 - 1.999.999</Name>
-      <Description>The price is between 1.750.000 and 1.999.999</Description>
-    </OutputValue>
-    <OutputValue>
-      <Name>&gt;= 2.000.000</Name>
-      <Description>The price is greater or equal to 2.000.000</Description>
+      <Name>81 - 100</Name>
+      <Description>The applicant score is between 81 and 100</Description>
     </OutputValue>
   </Output>
+  <TrainPairs>
+    <TrainPair>
+      <Source>1;1;1;1;1</Source>
+      <Target>1;0;0;0;0</Target>
+    </TrainPair>
+  </TrainPairs>
 </EstimateNet>
