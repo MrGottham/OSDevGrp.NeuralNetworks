@@ -6,8 +6,10 @@ namespace OSDevGrp.NeuralNetworks
 {
     public class EstimateNet : ByteBackpropagation
     {
+        private const string FILENAME = "EstimateNet.dat";
         private const string SETUP_FILENAME = "EstimateNet.xml";
-        
+
+        private string _SetupFileName = null;
         private double _Error = 0;
         private int _Epochs = 0;
         private System.Xml.XmlDocument _XmlSetupDocument = null;
@@ -19,7 +21,8 @@ namespace OSDevGrp.NeuralNetworks
         {
             static private System.Xml.XmlDocument _XmlSetupDocument = null;
 
-            public Definition(string setupfilename) : base()
+            public Definition(string setupfilename)
+                : base()
             {
                 try
                 {
@@ -42,7 +45,7 @@ namespace OSDevGrp.NeuralNetworks
                     }
                     else
                         throw new System.Exception("Can't find the node named '/" + XmlSetupDocument.DocumentElement.Name + "/Definition' in the file named '" + setupfilename + "'.");
-                    }
+                }
                 catch (System.Exception ex)
                 {
                     throw ex;
@@ -101,6 +104,26 @@ namespace OSDevGrp.NeuralNetworks
             catch (System.Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public string FileName
+        {
+            get
+            {
+                return FILENAME;
+            }
+        }
+
+        public string SetupFileName
+        {
+            get
+            {
+                return _SetupFileName;
+            }
+            private set
+            {
+                _SetupFileName = value;
             }
         }
 
@@ -185,11 +208,12 @@ namespace OSDevGrp.NeuralNetworks
                 base.Sigmoid.Mirror = -1;
                 base.Sigmoid.Slope = 1;
                 base.UseBias = true;
+                SetupFileName = setupfilename;
                 if (InputCategories == null)
-                    InputCategories = new System.Collections.Generic.List<EstimateNetInputCategory>((int) base.Neurons[0]);
+                    InputCategories = new System.Collections.Generic.List<EstimateNetInputCategory>((int)base.Neurons[0]);
                 while (InputCategories.Count > 0)
                     InputCategories.Clear();
-                InputCategories.Capacity = (int) base.Neurons[0];
+                InputCategories.Capacity = (int)base.Neurons[0];
                 System.Xml.XmlNode xmlnode = XmlSetupDocument.SelectSingleNode("/" + XmlSetupDocument.DocumentElement.Name + "/InputCategories");
                 if (xmlnode != null)
                 {
@@ -215,7 +239,7 @@ namespace OSDevGrp.NeuralNetworks
                     throw new System.Exception("Can't find the node named '/" + XmlSetupDocument.DocumentElement.Name + "/Output' in the file named '" + setupfilename + "'.");
                 xmlnode = XmlSetupDocument.SelectSingleNode("/" + XmlSetupDocument.DocumentElement.Name + "/TrainPairs");
                 if (xmlnode != null)
-                    TrainPairs = new EstimateNetTrainPairs(xmlnode, setupfilename, this, base.Neurons[0], base.Neurons[(int) base.Layers - 1]);
+                    TrainPairs = new EstimateNetTrainPairs(xmlnode, setupfilename, this, base.Neurons[0], base.Neurons[(int)base.Layers - 1]);
                 else
                     throw new System.Exception("Can't find the node named '/" + XmlSetupDocument.DocumentElement.Name + "/TrainPairs' in the file named '" + setupfilename + "'.");
             }
@@ -225,12 +249,69 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        public float ReTrain()
+        public double Train()
+        {
+            try
+            {
+                System.Collections.Generic.List<System.Collections.Generic.List<byte>> sources = new System.Collections.Generic.List<System.Collections.Generic.List<byte>>(TrainPairs.Count);
+                System.Collections.Generic.List<System.Collections.Generic.List<byte>> targets = new System.Collections.Generic.List<System.Collections.Generic.List<byte>>(TrainPairs.Count);
+                foreach (EstimateNetTrianPair trainpair in TrainPairs)
+                {
+                    sources.Add(new System.Collections.Generic.List<byte>((int) Neurons[0]));
+                    foreach (EstimateNetInputValue inputvalue in trainpair.Sources)
+                    {
+                        if (sources[sources.Count - 1].Count < sources[sources.Count - 1].Capacity)
+                            sources[sources.Count - 1].Add(inputvalue.Value);
+                    }
+                    while (sources[sources.Count - 1].Count < sources[sources.Count - 1].Capacity)
+                        sources[sources.Count - 1].Add((byte) Sigmoid.LowerBound);
+                    targets.Add(new System.Collections.Generic.List<byte>((int) Neurons[(int) Layers - 1]));
+                    foreach (EstimateNetOutputValue outputvalue in trainpair.Targets)
+                    {
+                        if (targets[targets.Count - 1].Count < targets[targets.Count - 1].Capacity)
+                        {
+                            if (outputvalue.Checked)
+                                targets[targets.Count - 1].Add((byte)Sigmoid.UpperBound);
+                            else if (Sigmoid.LowerBound < 0)
+                                targets[targets.Count - 1].Add(0);
+                            else
+                                targets[targets.Count - 1].Add((byte)Sigmoid.LowerBound);
+                        }
+                    }
+                    while (targets[targets.Count - 1].Count < targets[targets.Count - 1].Capacity)
+                        targets[targets.Count - 1].Add((byte) Sigmoid.LowerBound);
+                }
+                Epochs++;
+                Error = base.Train(sources, targets);
+                while (sources.Count > 0)
+                {
+                    while (sources[0].Count > 0)
+                        sources[0].Clear();
+                    sources.RemoveAt(0);
+                }
+                sources.Clear();
+                while (targets.Count > 0)
+                {
+                    while (targets[0].Count > 0)
+                        targets[0].Clear();
+                    targets.RemoveAt(0);
+                }
+                targets.Clear();
+                return Error;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public double ReTrain()
         {
             try
             {
                 Epochs = 0;
-                return 0;
+                base.Initialize();
+                return this.Train();
             }
             catch (System.Exception ex)
             {
@@ -242,7 +323,7 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                System.Collections.Generic.List<byte> input = new System.Collections.Generic.List<byte>((int) base.Neurons[0]);
+                System.Collections.Generic.List<byte> input = new System.Collections.Generic.List<byte>((int)base.Neurons[0]);
                 foreach (EstimateNetInputCategory category in inputcategories)
                 {
                     if (input.Count < base.Neurons[0])
@@ -250,11 +331,11 @@ namespace OSDevGrp.NeuralNetworks
                         if (category.SelectedInputValue != null)
                             input.Add(category.SelectedInputValue.Value);
                         else
-                            input.Add((byte) base.Sigmoid.LowerBound);
+                            input.Add((byte)base.Sigmoid.LowerBound);
                     }
                 }
                 while (input.Count < base.Neurons[0])
-                    input.Add((byte) base.Sigmoid.LowerBound);
+                    input.Add((byte)base.Sigmoid.LowerBound);
                 foreach (EstimateNetOutputValue outputvalue in Output.OutputValues)
                 {
                     outputvalue.Value = base.Sigmoid.LowerBound;
@@ -284,6 +365,30 @@ namespace OSDevGrp.NeuralNetworks
                 throw ex;
             }
         }
+
+        public void Save()
+        {
+            try
+            {
+                base.Save(FileName);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Load()
+        {
+            try
+            {
+                base.Load(FileName);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 
     public class EstimateNetInputCategory : System.Object
@@ -292,7 +397,7 @@ namespace OSDevGrp.NeuralNetworks
         private System.Xml.XmlNode _Description = null;
         private System.Collections.Generic.List<EstimateNetInputValue> _InputValues = null;
         private EstimateNetInputValue _SelectedInputValue = null;
-        
+
         public EstimateNetInputCategory(System.Xml.XmlNode xmlnode, string setupfilename) : base()
         {
             try
@@ -505,7 +610,7 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                _OutputValues = new System.Collections.Generic.List<EstimateNetOutputValue>((int) neurons);
+                _OutputValues = new System.Collections.Generic.List<EstimateNetOutputValue>((int)neurons);
                 foreach (System.Xml.XmlNode xmlchildnode in xmlnode.ChildNodes)
                 {
                     switch (xmlchildnode.Name.ToUpper())
@@ -524,7 +629,7 @@ namespace OSDevGrp.NeuralNetworks
                 }
                 if (_OutputValues.Count == 0)
                     throw new System.Exception("Can't find any nodes named 'OutputValue' under the node named 'Output' in the file named '" + setupfilename + "'.");
-                }
+            }
             catch (System.Exception ex)
             {
                 throw ex;
@@ -594,7 +699,7 @@ namespace OSDevGrp.NeuralNetworks
         }
     }
 
-    public class EstimateNetOutputValue : System.Object
+    public class EstimateNetOutputValue : System.Object, System.ICloneable
     {
         private System.Xml.XmlNode _Name = null;
         private System.Xml.XmlNode _Description = null;
@@ -680,51 +785,49 @@ namespace OSDevGrp.NeuralNetworks
                 return Value > 0.75;
             }
         }
-    }
 
-    public class EstimateNetTrainPairs : System.Object
-    {
-        private System.Collections.Generic.List<EstimateNetTrainSource> _Sources = null;
-        private System.Collections.Generic.List<EstimateNetTrainTarget> _Targets = null;
-
-        public EstimateNetTrainPairs(System.Xml.XmlNode xmlnode, string setupfilename, EstimateNet net, uint inputneurons, uint outputneurons)
+        public System.Object Clone()
         {
             try
             {
-                _Sources = new System.Collections.Generic.List<EstimateNetTrainSource>();
-                _Targets = new System.Collections.Generic.List<EstimateNetTrainTarget>();
-                foreach (System.Xml.XmlNode xmlchildnode in xmlnode.ChildNodes)
+                EstimateNetOutputValue clone = new EstimateNetOutputValue(_Name.ParentNode);
+                return (System.Object) clone;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+
+    public class EstimateNetTrainPairs : System.Collections.Generic.List<EstimateNetTrianPair>
+    {
+        private System.Xml.XmlNode _TrainPairsXmlNode = null;
+        private EstimateNet _EstimateNet = null;
+        private uint _InputNeurons = 0;
+        private uint _OutputNeurons = 0;
+        private bool _Modified = false;
+
+        public EstimateNetTrainPairs(System.Xml.XmlNode xmlnode, string setupfilename, EstimateNet net, uint inputneurons, uint outputneurons) : base()
+        {
+            try
+            {
+                TrainPairsXmlNode = xmlnode;
+                EstimateNet = net;
+                InputNeurons = inputneurons;
+                OutputNeurons = outputneurons;
+                Modified = false;
+                foreach (System.Xml.XmlNode xmlchildnode in TrainPairsXmlNode.ChildNodes)
                 {
                     switch (xmlchildnode.Name.ToUpper())
                     {
                         case "TRAINPAIR":
-                            System.Xml.XmlNode xmlsourcenode = null;
-                            System.Xml.XmlNode xmltargetnode = null;
-                            foreach (System.Xml.XmlNode xmlsubnode in xmlchildnode.ChildNodes)
-                            {
-                                switch (xmlsubnode.Name.ToUpper())
-                                {
-                                    case "SOURCE":
-                                        if (xmlsourcenode == null)
-                                            xmlsourcenode = xmlsubnode;
-                                        break;
-                                    case "TARGET":
-                                        if (xmltargetnode == null)
-                                            xmltargetnode = xmlsubnode;
-                                        break;
-                                }
-                            }
-                            if (xmlsourcenode == null)
-                                throw new System.Exception("Can't find a nodes named 'Source' under a node named '" + xmlnode.Name + "' in the file named '" + setupfilename + "'.");
-                            else if (xmltargetnode == null)
-                                throw new System.Exception("Can't find a nodes named 'Target' under a node named '" + xmlnode.Name + "' in the file named '" + setupfilename + "'.");
-                            _Sources.Add(new EstimateNetTrainSource(xmlsourcenode, setupfilename, net, inputneurons));
-                            _Targets.Add(new EstimateNetTrainTarget(xmltargetnode, setupfilename, net, outputneurons));
+                            this.Add(new EstimateNetTrianPair(xmlchildnode, setupfilename, EstimateNet, InputNeurons, OutputNeurons));
                             break;
                     }
                 }
-                if (_Sources.Count == 0 || _Targets.Count == 0 || _Sources.Count != _Targets.Count)
-                    throw new System.Exception("Can't find any nodes named 'TrainPair' under the node named '" + xmlnode.Name + "' in the file named '" + setupfilename + "'.");
+                if (Count == 0)
+                    throw new System.Exception("Can't find any nodes named 'TrainPair' under the node named '" + TrainPairsXmlNode.Name + "' in the file named '" + setupfilename + "'.");
             }
             catch (System.Exception ex)
             {
@@ -736,17 +839,188 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                if (Sources != null)
+                while (Count > 0)
+                    Clear();
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private System.Xml.XmlNode TrainPairsXmlNode
+        {
+            get
+            {
+                return _TrainPairsXmlNode;
+            }
+            set
+            {
+                _TrainPairsXmlNode = value;
+            }
+        }
+
+        public EstimateNet EstimateNet
+        {
+            get
+            {
+                return _EstimateNet;
+            }
+            private set
+            {
+                _EstimateNet = value;
+            }
+        }
+
+        private uint InputNeurons
+        {
+            get
+            {
+                return _InputNeurons;
+            }
+            set
+            {
+                _InputNeurons = value;
+            }
+        }
+
+        private uint OutputNeurons
+        {
+            get
+            {
+                return _OutputNeurons;
+            }
+            set
+            {
+                _OutputNeurons = value;
+            }
+        }
+
+        public bool Modified
+        {
+            get
+            {
+                return _Modified;
+            }
+            private set
+            {
+                _Modified = value;
+            }
+        }
+
+        public EstimateNetTrianPair Create()
+        {
+            try
+            {
+                System.Xml.XmlElement xmlelement = TrainPairsXmlNode.OwnerDocument.CreateElement("TrainPair");
+                xmlelement.AppendChild(xmlelement.OwnerDocument.CreateElement("Source"));
+                for (int i = 0; i < InputNeurons; i++)
                 {
-                    while (Sources.Count > 0)
-                        Sources.RemoveAt(0);
-                    Sources.Clear();
+                    if (xmlelement.LastChild.InnerText.Length > 0)
+                        xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + ';';
+                    if (i < EstimateNet.InputCategories.Count)
+                    {
+                        if (EstimateNet.InputCategories[0].InputValues.Count > 0)
+                            xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + EstimateNet.InputCategories[0].InputValues[0].Value.ToString();
+                        else if (EstimateNet.Sigmoid.LowerBound < 0)
+                            xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + '0';
+                        else
+                            xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + EstimateNet.Sigmoid.LowerBound.ToString();
+                    }
+                    else if (EstimateNet.Sigmoid.LowerBound < 0)
+                        xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + '0';
+                    else
+                        xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + EstimateNet.Sigmoid.LowerBound.ToString();
                 }
-                if (Targets != null)
+                xmlelement.AppendChild(xmlelement.OwnerDocument.CreateElement("Target"));
+                for (int i = 0; i < OutputNeurons; i++)
                 {
-                    while (Targets.Count > 0)
-                        Targets.RemoveAt(0);
-                    Targets.Clear();
+                    if (xmlelement.LastChild.InnerText.Length > 0)
+                        xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + ';';
+                    if (EstimateNet.Sigmoid.LowerBound < 0)
+                        xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + '0';
+                    else
+                        xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + EstimateNet.Sigmoid.LowerBound.ToString();
+                }
+                return new EstimateNetTrianPair(xmlelement, string.Empty, EstimateNet, InputNeurons, OutputNeurons);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+
+    public class EstimateNetTrianPair : System.Object
+    {
+        private System.Xml.XmlNode _XmlNode = null;
+        private EstimateNet _EstimateNet = null;
+        private uint _InputNeurons = 0;
+        private uint _OutputNeurons = 0;
+        private System.Xml.XmlNode _SourceXmlNode = null;
+        private System.Xml.XmlNode _TargetXmlNode = null;
+        private System.Collections.Generic.List<EstimateNetInputValue> _Sources = null;
+        private System.Collections.Generic.List<EstimateNetOutputValue> _Targets = null;
+
+        public EstimateNetTrianPair(System.Xml.XmlNode xmlnode, string setupfilename, EstimateNet net, uint inputneurons, uint outputneurons) : base()
+        {
+            try
+            {
+                XmlNode = xmlnode;
+                EstimateNet = net;
+                InputNeurons = inputneurons;
+                OutputNeurons = outputneurons;
+                foreach (System.Xml.XmlNode xmlchildnode in XmlNode.ChildNodes)
+                {
+                    switch (xmlchildnode.Name.ToUpper())
+                    {
+                        case "SOURCE":
+                            SourceXmlNode = xmlchildnode;
+                            break;
+                        case "TARGET":
+                            TargetXmlNode = xmlchildnode;
+                            break;
+                    }
+                }
+                if (SourceXmlNode == null)
+                    throw new System.Exception("Can't find a nodes named 'Source' under a node named '" + XmlNode.Name + "' in the file named '" + setupfilename + "'.");
+                else if (TargetXmlNode == null)
+                    throw new System.Exception("Can't find a nodes named 'Target' under a node named '" + XmlNode.Name + "' in the file named '" + setupfilename + "'.");
+                Sources = new System.Collections.Generic.List<EstimateNetInputValue>((int) InputNeurons);
+                string[] s = SourceXmlNode.InnerText.Split(';');
+                if (s.Length != Sources.Capacity)
+                    throw new System.Exception("The node named '" + SourceXmlNode.Name + "' under a node named '" + SourceXmlNode.ParentNode.Name + "' does not have " + Sources.Capacity.ToString() + " elements in it value (" + SourceXmlNode.InnerText + ").");
+                int i = 0;
+                while (i < Sources.Capacity)
+                {
+                    if (i < EstimateNet.InputCategories.Count)
+                    {
+                        int j = 0; bool b = false;
+                        while (j < EstimateNet.InputCategories[i].InputValues.Count && !b)
+                        {
+                            b = (byte.Parse(s[i]) == EstimateNet.InputCategories[i].InputValues[j].Value);
+                            if (b)
+                                Sources.Add(EstimateNet.InputCategories[i].InputValues[j]);
+                            else
+                                j++;
+                        }
+                        if (!b)
+                            throw new System.Exception("The node named '" + SourceXmlNode.Name + "' under a node named '" + SourceXmlNode.ParentNode.Name + "' continue an unknown source element (" + (i + 1).ToString() + ") with the value '" + s[i] + "'.");
+                    }
+                    i++;
+                }
+                Targets = new System.Collections.Generic.List<EstimateNetOutputValue>((int) OutputNeurons);
+                s = TargetXmlNode.InnerText.Split(';');
+                if (s.Length != Targets.Capacity)
+                    throw new System.Exception("The node named '" + TargetXmlNode.Name + "' under a node named '" + TargetXmlNode.ParentNode.Name + "' does not have " + Targets.Capacity.ToString() + " elements in it value (" + TargetXmlNode.InnerText + ").");
+                for (i = 0; i < Targets.Capacity; i++)
+                {
+                    if (i < EstimateNet.Output.OutputValues.Count)
+                    {
+                        EstimateNetOutputValue outputvalue = (EstimateNetOutputValue) EstimateNet.Output.OutputValues[i].Clone();
+                        outputvalue.Value = float.Parse(s[i]);
+                        Targets.Add(outputvalue);
+                    }
                 }
             }
             catch (System.Exception ex)
@@ -755,130 +1029,120 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        public System.Collections.Generic.List<EstimateNetTrainSource> Sources
+        ~EstimateNetTrianPair()
+        {
+            try
+            {
+                if (Sources != null)
+                {
+                    while (Sources.Count > 0)
+                        Sources.Clear();
+                }
+                if (Targets != null)
+                {
+                    while (Targets.Count > 0)
+                        Targets.Clear();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private System.Xml.XmlNode XmlNode
+        {
+            get
+            {
+                return _XmlNode;
+            }
+            set
+            {
+                _XmlNode = value;
+            }
+        }
+
+        public EstimateNet EstimateNet
+        {
+            get
+            {
+                return _EstimateNet;
+            }
+            private set
+            {
+                _EstimateNet = value;
+            }
+        }
+
+        private uint InputNeurons
+        {
+            get
+            {
+                return _InputNeurons;
+            }
+            set
+            {
+                _InputNeurons = value;
+            }
+        }
+
+        private uint OutputNeurons
+        {
+            get
+            {
+                return _OutputNeurons;
+            }
+            set
+            {
+                _OutputNeurons = value;
+            }
+        }
+
+        public System.Xml.XmlNode SourceXmlNode
+        {
+            get
+            {
+                return _SourceXmlNode;
+            }
+            private set
+            {
+                _SourceXmlNode = value;
+            }
+        }
+
+        public System.Xml.XmlNode TargetXmlNode
+        {
+            get
+            {
+                return _TargetXmlNode;
+            }
+            private set
+            {
+                _TargetXmlNode = value;
+            }
+        }
+
+        public System.Collections.Generic.List<EstimateNetInputValue> Sources
         {
             get
             {
                 return _Sources;
             }
+            private set
+            {
+                _Sources = value;
+            }
         }
 
-        public System.Collections.Generic.List<EstimateNetTrainTarget> Targets
+        public System.Collections.Generic.List<EstimateNetOutputValue> Targets
         {
             get
             {
                 return _Targets;
             }
-        }
-    }
-
-    public class EstimateNetTrainSource : System.Collections.Generic.List<byte>
-    {
-        private System.Xml.XmlNode _Source = null;
-
-        public EstimateNetTrainSource(System.Xml.XmlNode xmlnode, string setupfilename, EstimateNet net, uint neurons) : base((int) neurons)
-        {
-            try
+            private set
             {
-                _Source = xmlnode;
-                string[] s = _Source.InnerText.Split(';');
-                if (s.Length != Capacity)
-                    throw new System.Exception("The node named '" + _Source.Name + "' under a node named '" + _Source.ParentNode.Name + "' does not have " + Capacity.ToString() + " elements in it value (" + _Source.InnerText + ").");
-                int i = 0;
-                while (i < Capacity)
-                {
-                    if (i < net.InputCategories.Count)
-                    {
-                        int j = 0; bool b = false;
-                        while (j < net.InputCategories[i].InputValues.Count && !b)
-                        {
-                            b = (byte.Parse(s[i]) == net.InputCategories[i].InputValues[j].Value);
-                            j++;
-                        }
-                        if (!b)
-                            throw new System.Exception("The node named '" + _Source.Name + "' under a node named '" + _Source.ParentNode.Name + "' continue an unknown source element (" + (i + 1).ToString() + ") with the value '" + s[i] + "'.");
-                    }
-                    else
-                        Add((byte) net.Sigmoid.LowerBound);
-                    i++;
-                }
-                while (Count < Capacity)
-                    Add((byte) net.Sigmoid.LowerBound);
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        ~EstimateNetTrainSource()
-        {
-            try
-            {
-                while (Count > 0)
-                    Clear();
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public System.Xml.XmlNode Source
-        {
-            get
-            {
-                return _Source;
-            }
-        }
-    }
-
-    public class EstimateNetTrainTarget : System.Collections.Generic.List<byte>
-    {
-        private System.Xml.XmlNode _Target = null;
-
-        public EstimateNetTrainTarget(System.Xml.XmlNode xmlnode, string filename, EstimateNet net, uint neurons) : base((int) neurons)
-        {
-            try
-            {
-                _Target = xmlnode;
-                string[] s = _Target.InnerText.Split(';');
-                if (s.Length != Capacity)
-                    throw new System.Exception("The node named '" + _Target.Name + "' under a node named '" + _Target.ParentNode.Name + "' does not have " + Capacity.ToString() + " elements in it value (" + _Target.InnerText + ").");
-                for (int i = 0; i < Capacity; i++)
-                {
-                    if (i < net.Output.OutputValues.Count)
-                        Add(byte.Parse(s[i]));
-                    else
-                        Add((byte) net.Sigmoid.LowerBound);
-                }
-                while (Count < Capacity)
-                    Add((byte) net.Sigmoid.LowerBound);
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        ~EstimateNetTrainTarget()
-        {
-            try
-            {
-                while (Count > 0)
-                    Clear();
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public System.Xml.XmlNode Target
-        {
-            get
-            {
-                return _Target;
+                _Targets = value;
             }
         }
     }

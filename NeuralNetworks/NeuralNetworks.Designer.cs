@@ -68,12 +68,25 @@
             this.tabPageEstimateNet = new System.Windows.Forms.TabPage();
             this.panelEstimateNetTraining = new System.Windows.Forms.Panel();
             this.groupBoxEstimateNetTraining = new System.Windows.Forms.GroupBox();
+            this.panelEstimateNetTrainingPairs = new System.Windows.Forms.Panel();
+            this.listViewEstimateNetTrainingPairs = new System.Windows.Forms.ListView();
+            this.panelEstimateNetTrainingButtons = new System.Windows.Forms.Panel();
+            this.panelEstimateNetTrainingButtonsList = new System.Windows.Forms.Panel();
+            this.buttonEstimateNetTrainingDelete = new System.Windows.Forms.Button();
+            this.buttonEstimateNetTrainingModify = new System.Windows.Forms.Button();
+            this.buttonEstimateNetTrainingCreate = new System.Windows.Forms.Button();
             this.panelEstimateNetTrainingValues = new System.Windows.Forms.Panel();
             this.textBoxEstimateNetEpochs = new System.Windows.Forms.TextBox();
             this.textBoxEstimateNetErrorValue = new System.Windows.Forms.TextBox();
             this.labelEstimateNetErrorValue = new System.Windows.Forms.Label();
             this.panelEstimateNetRunning = new System.Windows.Forms.Panel();
             this.groupBoxEstimateNetRunning = new System.Windows.Forms.GroupBox();
+            this.groupBoxEstimateNetOutput = new System.Windows.Forms.GroupBox();
+            this.checkBoxEstimateNetOutput5 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput4 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxEstimateNetOutput1 = new System.Windows.Forms.CheckBox();
             this.groupBoxEstimateNetCategory5 = new System.Windows.Forms.GroupBox();
             this.radioButtonEstimateNetInput54 = new System.Windows.Forms.RadioButton();
             this.radioButtonEstimateNetInput53 = new System.Windows.Forms.RadioButton();
@@ -107,12 +120,6 @@
             this.textBoxEstimateNetLarningRate = new System.Windows.Forms.TextBox();
             this.labelEstimateNetLearningRate = new System.Windows.Forms.Label();
             this.timerTraining = new System.Windows.Forms.Timer(this.components);
-            this.groupBoxEstimateNetOutput = new System.Windows.Forms.GroupBox();
-            this.checkBoxEstimateNetOutput1 = new System.Windows.Forms.CheckBox();
-            this.checkBoxEstimateNetOutput2 = new System.Windows.Forms.CheckBox();
-            this.checkBoxEstimateNetOutput3 = new System.Windows.Forms.CheckBox();
-            this.checkBoxEstimateNetOutput4 = new System.Windows.Forms.CheckBox();
-            this.checkBoxEstimateNetOutput5 = new System.Windows.Forms.CheckBox();
             groupBoxXOrNetRunning = new System.Windows.Forms.GroupBox();
             labelEstimateNetEpochs = new System.Windows.Forms.Label();
             groupBoxXOrNetRunning.SuspendLayout();
@@ -130,9 +137,13 @@
             this.tabPageEstimateNet.SuspendLayout();
             this.panelEstimateNetTraining.SuspendLayout();
             this.groupBoxEstimateNetTraining.SuspendLayout();
+            this.panelEstimateNetTrainingPairs.SuspendLayout();
+            this.panelEstimateNetTrainingButtons.SuspendLayout();
+            this.panelEstimateNetTrainingButtonsList.SuspendLayout();
             this.panelEstimateNetTrainingValues.SuspendLayout();
             this.panelEstimateNetRunning.SuspendLayout();
             this.groupBoxEstimateNetRunning.SuspendLayout();
+            this.groupBoxEstimateNetOutput.SuspendLayout();
             this.groupBoxEstimateNetCategory5.SuspendLayout();
             this.groupBoxEstimateNetCategory4.SuspendLayout();
             this.groupBoxEstimateNetCategory3.SuspendLayout();
@@ -140,7 +151,6 @@
             this.groupBoxEstimateNetCategory1.SuspendLayout();
             this.panelEstimateNetConfiguration.SuspendLayout();
             this.groupBoxEstimateNetConfiguration.SuspendLayout();
-            this.groupBoxEstimateNetOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxXOrNetRunning
@@ -332,6 +342,7 @@
             this.listViewXOrNetTrainingPairs.GridLines = true;
             this.listViewXOrNetTrainingPairs.LargeImageList = this.imageListLarge;
             this.listViewXOrNetTrainingPairs.Location = new System.Drawing.Point(3, 16);
+            this.listViewXOrNetTrainingPairs.MultiSelect = false;
             this.listViewXOrNetTrainingPairs.Name = "listViewXOrNetTrainingPairs";
             this.listViewXOrNetTrainingPairs.Size = new System.Drawing.Size(566, 153);
             this.listViewXOrNetTrainingPairs.SmallImageList = this.imageListSmall;
@@ -511,6 +522,8 @@
             // 
             // groupBoxEstimateNetTraining
             // 
+            this.groupBoxEstimateNetTraining.Controls.Add(this.panelEstimateNetTrainingPairs);
+            this.groupBoxEstimateNetTraining.Controls.Add(this.panelEstimateNetTrainingButtons);
             this.groupBoxEstimateNetTraining.Controls.Add(this.panelEstimateNetTrainingValues);
             this.groupBoxEstimateNetTraining.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxEstimateNetTraining.Location = new System.Drawing.Point(0, 0);
@@ -519,6 +532,81 @@
             this.groupBoxEstimateNetTraining.TabIndex = 0;
             this.groupBoxEstimateNetTraining.TabStop = false;
             this.groupBoxEstimateNetTraining.Text = "Training";
+            // 
+            // panelEstimateNetTrainingPairs
+            // 
+            this.panelEstimateNetTrainingPairs.Controls.Add(this.listViewEstimateNetTrainingPairs);
+            this.panelEstimateNetTrainingPairs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEstimateNetTrainingPairs.Location = new System.Drawing.Point(3, 70);
+            this.panelEstimateNetTrainingPairs.Name = "panelEstimateNetTrainingPairs";
+            this.panelEstimateNetTrainingPairs.Size = new System.Drawing.Size(572, 37);
+            this.panelEstimateNetTrainingPairs.TabIndex = 1;
+            // 
+            // listViewEstimateNetTrainingPairs
+            // 
+            this.listViewEstimateNetTrainingPairs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewEstimateNetTrainingPairs.FullRowSelect = true;
+            this.listViewEstimateNetTrainingPairs.GridLines = true;
+            this.listViewEstimateNetTrainingPairs.LargeImageList = this.imageListLarge;
+            this.listViewEstimateNetTrainingPairs.Location = new System.Drawing.Point(0, 0);
+            this.listViewEstimateNetTrainingPairs.MultiSelect = false;
+            this.listViewEstimateNetTrainingPairs.Name = "listViewEstimateNetTrainingPairs";
+            this.listViewEstimateNetTrainingPairs.Size = new System.Drawing.Size(572, 37);
+            this.listViewEstimateNetTrainingPairs.SmallImageList = this.imageListSmall;
+            this.listViewEstimateNetTrainingPairs.TabIndex = 0;
+            this.listViewEstimateNetTrainingPairs.UseCompatibleStateImageBehavior = false;
+            this.listViewEstimateNetTrainingPairs.View = System.Windows.Forms.View.Details;
+            this.listViewEstimateNetTrainingPairs.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewEstimateNetTrainingPairs_ItemSelectionChanged);
+            // 
+            // panelEstimateNetTrainingButtons
+            // 
+            this.panelEstimateNetTrainingButtons.Controls.Add(this.panelEstimateNetTrainingButtonsList);
+            this.panelEstimateNetTrainingButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelEstimateNetTrainingButtons.Location = new System.Drawing.Point(3, 107);
+            this.panelEstimateNetTrainingButtons.Name = "panelEstimateNetTrainingButtons";
+            this.panelEstimateNetTrainingButtons.Size = new System.Drawing.Size(572, 32);
+            this.panelEstimateNetTrainingButtons.TabIndex = 2;
+            // 
+            // panelEstimateNetTrainingButtonsList
+            // 
+            this.panelEstimateNetTrainingButtonsList.Controls.Add(this.buttonEstimateNetTrainingDelete);
+            this.panelEstimateNetTrainingButtonsList.Controls.Add(this.buttonEstimateNetTrainingModify);
+            this.panelEstimateNetTrainingButtonsList.Controls.Add(this.buttonEstimateNetTrainingCreate);
+            this.panelEstimateNetTrainingButtonsList.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelEstimateNetTrainingButtonsList.Location = new System.Drawing.Point(332, 0);
+            this.panelEstimateNetTrainingButtonsList.Name = "panelEstimateNetTrainingButtonsList";
+            this.panelEstimateNetTrainingButtonsList.Size = new System.Drawing.Size(240, 32);
+            this.panelEstimateNetTrainingButtonsList.TabIndex = 0;
+            // 
+            // buttonEstimateNetTrainingDelete
+            // 
+            this.buttonEstimateNetTrainingDelete.Location = new System.Drawing.Point(165, 6);
+            this.buttonEstimateNetTrainingDelete.Name = "buttonEstimateNetTrainingDelete";
+            this.buttonEstimateNetTrainingDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonEstimateNetTrainingDelete.TabIndex = 2;
+            this.buttonEstimateNetTrainingDelete.Text = "&Delete";
+            this.buttonEstimateNetTrainingDelete.UseVisualStyleBackColor = true;
+            this.buttonEstimateNetTrainingDelete.Click += new System.EventHandler(this.buttonEstimateNetTrainingDelete_Click);
+            // 
+            // buttonEstimateNetTrainingModify
+            // 
+            this.buttonEstimateNetTrainingModify.Location = new System.Drawing.Point(84, 6);
+            this.buttonEstimateNetTrainingModify.Name = "buttonEstimateNetTrainingModify";
+            this.buttonEstimateNetTrainingModify.Size = new System.Drawing.Size(75, 23);
+            this.buttonEstimateNetTrainingModify.TabIndex = 1;
+            this.buttonEstimateNetTrainingModify.Text = "&Modify";
+            this.buttonEstimateNetTrainingModify.UseVisualStyleBackColor = true;
+            this.buttonEstimateNetTrainingModify.Click += new System.EventHandler(this.buttonEstimateNetTrainingModify_Click);
+            // 
+            // buttonEstimateNetTrainingCreate
+            // 
+            this.buttonEstimateNetTrainingCreate.Location = new System.Drawing.Point(3, 6);
+            this.buttonEstimateNetTrainingCreate.Name = "buttonEstimateNetTrainingCreate";
+            this.buttonEstimateNetTrainingCreate.Size = new System.Drawing.Size(75, 23);
+            this.buttonEstimateNetTrainingCreate.TabIndex = 0;
+            this.buttonEstimateNetTrainingCreate.Text = "&Create";
+            this.buttonEstimateNetTrainingCreate.UseVisualStyleBackColor = true;
+            this.buttonEstimateNetTrainingCreate.Click += new System.EventHandler(this.buttonEstimateNetTrainingCreate_Click);
             // 
             // panelEstimateNetTrainingValues
             // 
@@ -583,6 +671,76 @@
             this.groupBoxEstimateNetRunning.TabIndex = 0;
             this.groupBoxEstimateNetRunning.TabStop = false;
             this.groupBoxEstimateNetRunning.Text = "Running";
+            // 
+            // groupBoxEstimateNetOutput
+            // 
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput5);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput4);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput3);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput2);
+            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput1);
+            this.groupBoxEstimateNetOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxEstimateNetOutput.Location = new System.Drawing.Point(403, 16);
+            this.groupBoxEstimateNetOutput.Name = "groupBoxEstimateNetOutput";
+            this.groupBoxEstimateNetOutput.Size = new System.Drawing.Size(172, 131);
+            this.groupBoxEstimateNetOutput.TabIndex = 5;
+            this.groupBoxEstimateNetOutput.TabStop = false;
+            this.groupBoxEstimateNetOutput.Text = "Output";
+            // 
+            // checkBoxEstimateNetOutput5
+            // 
+            this.checkBoxEstimateNetOutput5.AutoSize = true;
+            this.checkBoxEstimateNetOutput5.Enabled = false;
+            this.checkBoxEstimateNetOutput5.Location = new System.Drawing.Point(6, 111);
+            this.checkBoxEstimateNetOutput5.Name = "checkBoxEstimateNetOutput5";
+            this.checkBoxEstimateNetOutput5.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput5.TabIndex = 4;
+            this.checkBoxEstimateNetOutput5.Text = "Value";
+            this.checkBoxEstimateNetOutput5.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput4
+            // 
+            this.checkBoxEstimateNetOutput4.AutoSize = true;
+            this.checkBoxEstimateNetOutput4.Enabled = false;
+            this.checkBoxEstimateNetOutput4.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxEstimateNetOutput4.Name = "checkBoxEstimateNetOutput4";
+            this.checkBoxEstimateNetOutput4.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput4.TabIndex = 3;
+            this.checkBoxEstimateNetOutput4.Text = "Value";
+            this.checkBoxEstimateNetOutput4.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput3
+            // 
+            this.checkBoxEstimateNetOutput3.AutoSize = true;
+            this.checkBoxEstimateNetOutput3.Enabled = false;
+            this.checkBoxEstimateNetOutput3.Location = new System.Drawing.Point(6, 66);
+            this.checkBoxEstimateNetOutput3.Name = "checkBoxEstimateNetOutput3";
+            this.checkBoxEstimateNetOutput3.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput3.TabIndex = 2;
+            this.checkBoxEstimateNetOutput3.Text = "Value";
+            this.checkBoxEstimateNetOutput3.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput2
+            // 
+            this.checkBoxEstimateNetOutput2.AutoSize = true;
+            this.checkBoxEstimateNetOutput2.Enabled = false;
+            this.checkBoxEstimateNetOutput2.Location = new System.Drawing.Point(6, 43);
+            this.checkBoxEstimateNetOutput2.Name = "checkBoxEstimateNetOutput2";
+            this.checkBoxEstimateNetOutput2.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput2.TabIndex = 1;
+            this.checkBoxEstimateNetOutput2.Text = "Value";
+            this.checkBoxEstimateNetOutput2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEstimateNetOutput1
+            // 
+            this.checkBoxEstimateNetOutput1.AutoSize = true;
+            this.checkBoxEstimateNetOutput1.Enabled = false;
+            this.checkBoxEstimateNetOutput1.Location = new System.Drawing.Point(6, 20);
+            this.checkBoxEstimateNetOutput1.Name = "checkBoxEstimateNetOutput1";
+            this.checkBoxEstimateNetOutput1.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxEstimateNetOutput1.TabIndex = 0;
+            this.checkBoxEstimateNetOutput1.Text = "Value";
+            this.checkBoxEstimateNetOutput1.UseVisualStyleBackColor = true;
             // 
             // groupBoxEstimateNetCategory5
             // 
@@ -946,76 +1104,6 @@
             // 
             this.timerTraining.Tick += new System.EventHandler(this.timerTraining_Tick);
             // 
-            // groupBoxEstimateNetOutput
-            // 
-            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput5);
-            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput4);
-            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput3);
-            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput2);
-            this.groupBoxEstimateNetOutput.Controls.Add(this.checkBoxEstimateNetOutput1);
-            this.groupBoxEstimateNetOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxEstimateNetOutput.Location = new System.Drawing.Point(403, 16);
-            this.groupBoxEstimateNetOutput.Name = "groupBoxEstimateNetOutput";
-            this.groupBoxEstimateNetOutput.Size = new System.Drawing.Size(172, 131);
-            this.groupBoxEstimateNetOutput.TabIndex = 5;
-            this.groupBoxEstimateNetOutput.TabStop = false;
-            this.groupBoxEstimateNetOutput.Text = "Output";
-            // 
-            // checkBoxEstimateNetOutput1
-            // 
-            this.checkBoxEstimateNetOutput1.AutoSize = true;
-            this.checkBoxEstimateNetOutput1.Enabled = false;
-            this.checkBoxEstimateNetOutput1.Location = new System.Drawing.Point(6, 20);
-            this.checkBoxEstimateNetOutput1.Name = "checkBoxEstimateNetOutput1";
-            this.checkBoxEstimateNetOutput1.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxEstimateNetOutput1.TabIndex = 0;
-            this.checkBoxEstimateNetOutput1.Text = "Value";
-            this.checkBoxEstimateNetOutput1.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxEstimateNetOutput2
-            // 
-            this.checkBoxEstimateNetOutput2.AutoSize = true;
-            this.checkBoxEstimateNetOutput2.Enabled = false;
-            this.checkBoxEstimateNetOutput2.Location = new System.Drawing.Point(6, 43);
-            this.checkBoxEstimateNetOutput2.Name = "checkBoxEstimateNetOutput2";
-            this.checkBoxEstimateNetOutput2.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxEstimateNetOutput2.TabIndex = 1;
-            this.checkBoxEstimateNetOutput2.Text = "Value";
-            this.checkBoxEstimateNetOutput2.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxEstimateNetOutput3
-            // 
-            this.checkBoxEstimateNetOutput3.AutoSize = true;
-            this.checkBoxEstimateNetOutput3.Enabled = false;
-            this.checkBoxEstimateNetOutput3.Location = new System.Drawing.Point(6, 66);
-            this.checkBoxEstimateNetOutput3.Name = "checkBoxEstimateNetOutput3";
-            this.checkBoxEstimateNetOutput3.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxEstimateNetOutput3.TabIndex = 2;
-            this.checkBoxEstimateNetOutput3.Text = "Value";
-            this.checkBoxEstimateNetOutput3.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxEstimateNetOutput4
-            // 
-            this.checkBoxEstimateNetOutput4.AutoSize = true;
-            this.checkBoxEstimateNetOutput4.Enabled = false;
-            this.checkBoxEstimateNetOutput4.Location = new System.Drawing.Point(6, 88);
-            this.checkBoxEstimateNetOutput4.Name = "checkBoxEstimateNetOutput4";
-            this.checkBoxEstimateNetOutput4.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxEstimateNetOutput4.TabIndex = 3;
-            this.checkBoxEstimateNetOutput4.Text = "Value";
-            this.checkBoxEstimateNetOutput4.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxEstimateNetOutput5
-            // 
-            this.checkBoxEstimateNetOutput5.AutoSize = true;
-            this.checkBoxEstimateNetOutput5.Enabled = false;
-            this.checkBoxEstimateNetOutput5.Location = new System.Drawing.Point(6, 111);
-            this.checkBoxEstimateNetOutput5.Name = "checkBoxEstimateNetOutput5";
-            this.checkBoxEstimateNetOutput5.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxEstimateNetOutput5.TabIndex = 4;
-            this.checkBoxEstimateNetOutput5.Text = "Value";
-            this.checkBoxEstimateNetOutput5.UseVisualStyleBackColor = true;
-            // 
             // NeuralNetworks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1046,10 +1134,15 @@
             this.tabPageEstimateNet.ResumeLayout(false);
             this.panelEstimateNetTraining.ResumeLayout(false);
             this.groupBoxEstimateNetTraining.ResumeLayout(false);
+            this.panelEstimateNetTrainingPairs.ResumeLayout(false);
+            this.panelEstimateNetTrainingButtons.ResumeLayout(false);
+            this.panelEstimateNetTrainingButtonsList.ResumeLayout(false);
             this.panelEstimateNetTrainingValues.ResumeLayout(false);
             this.panelEstimateNetTrainingValues.PerformLayout();
             this.panelEstimateNetRunning.ResumeLayout(false);
             this.groupBoxEstimateNetRunning.ResumeLayout(false);
+            this.groupBoxEstimateNetOutput.ResumeLayout(false);
+            this.groupBoxEstimateNetOutput.PerformLayout();
             this.groupBoxEstimateNetCategory5.ResumeLayout(false);
             this.groupBoxEstimateNetCategory5.PerformLayout();
             this.groupBoxEstimateNetCategory4.ResumeLayout(false);
@@ -1063,8 +1156,6 @@
             this.panelEstimateNetConfiguration.ResumeLayout(false);
             this.groupBoxEstimateNetConfiguration.ResumeLayout(false);
             this.groupBoxEstimateNetConfiguration.PerformLayout();
-            this.groupBoxEstimateNetOutput.ResumeLayout(false);
-            this.groupBoxEstimateNetOutput.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1153,6 +1244,13 @@
         private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput5;
         private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput4;
         private System.Windows.Forms.CheckBox checkBoxEstimateNetOutput3;
+        private System.Windows.Forms.Panel panelEstimateNetTrainingButtons;
+        private System.Windows.Forms.Panel panelEstimateNetTrainingPairs;
+        private System.Windows.Forms.ListView listViewEstimateNetTrainingPairs;
+        private System.Windows.Forms.Panel panelEstimateNetTrainingButtonsList;
+        private System.Windows.Forms.Button buttonEstimateNetTrainingDelete;
+        private System.Windows.Forms.Button buttonEstimateNetTrainingModify;
+        private System.Windows.Forms.Button buttonEstimateNetTrainingCreate;
     }
 }
 

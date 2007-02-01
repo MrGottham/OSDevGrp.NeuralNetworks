@@ -2,6 +2,10 @@
 <EstimateNet>
   <Definition>
     <Neurons>5</Neurons>
+    <Neurons>10</Neurons>
+    <Neurons>25</Neurons>
+    <Neurons>25</Neurons>
+    <Neurons>25</Neurons>
     <Neurons>5</Neurons>
   </Definition>
   <InputCategories>
@@ -134,6 +138,10 @@
     <TrainPair>
       <Source>1;1;1;1;1</Source>
       <Target>1;0;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>8;8;8;8;8</Source>
+      <Target>0;0;0;1;1</Target>
     </TrainPair>
   </TrainPairs>
 </EstimateNet>

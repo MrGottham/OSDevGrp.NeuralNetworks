@@ -73,7 +73,8 @@ namespace OSDevGrp.NeuralNetworks
                 this.checkBoxEstimateNetUseBias.Tag = _EstimateNet;
                 this.checkBoxEstimateNetUseBias.DataBindings.Add(new System.Windows.Forms.Binding("Checked", _EstimateNet, "UseBias", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
                 this.textBoxEstimateNetErrorValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-                this.textBoxEstimateNetEpochs.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Error", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                this.textBoxEstimateNetEpochs.DataBindings.Add(new System.Windows.Forms.Binding("Text", _EstimateNet, "Epochs", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+                UpdateEstimateNetTrainingPairs();
                 int width_groupboxes = 0, width = 0;
                 for (int i = 0; i < 5; i++)
                 {
@@ -163,7 +164,7 @@ namespace OSDevGrp.NeuralNetworks
                 this.timerTraining.Enabled = false;
                 if (XOrNet != null)
                 {
-                    if (XOrNet.Error > XOrNet.Tolerance)
+                    if (XOrNet.Epochs == 0 || XOrNet.Error > XOrNet.Tolerance)
                     {
                         double d = XOrNet.Train();
                         float f = XOrNet.Run(this.checkBoxXOrNetValue1.Checked, this.checkBoxXOrNetValue2.Checked);
@@ -177,6 +178,24 @@ namespace OSDevGrp.NeuralNetworks
                             binding.ReadValue();
                     }
                 }
+                if (EstimateNet != null)
+                {
+                    if (EstimateNet.Epochs == 0 || EstimateNet.Error > EstimateNet.Tolerance)
+                    {
+                        double d = EstimateNet.Train();
+                        EstimateNetOutput output = EstimateNet.Run();
+                        foreach (System.Windows.Forms.Binding binding in this.textBoxEstimateNetErrorValue.DataBindings)
+                            binding.ReadValue();
+                        foreach (System.Windows.Forms.Binding binding in this.textBoxEstimateNetEpochs.DataBindings)
+                            binding.ReadValue();
+                        for (int i = 0; i < 5; i++)
+                        {
+                            System.Windows.Forms.CheckBox checkbox = (System.Windows.Forms.CheckBox) this.groupBoxEstimateNetOutput.Controls["checkBoxEstimateNetOutput" + (i + 1).ToString()];
+                            foreach (System.Windows.Forms.Binding binding in checkbox.DataBindings)
+                                binding.ReadValue();
+                        }
+                    }
+                }
                 this.timerTraining.Interval = 100;
                 this.timerTraining.Enabled = true;
             }
@@ -184,6 +203,72 @@ namespace OSDevGrp.NeuralNetworks
             {
                 this.timerTraining.Enabled = false;
                 System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void UpdateEstimateNetTrainingPairs()
+        {
+            try
+            {
+                this.listViewEstimateNetTrainingPairs.Clear();
+                foreach (EstimateNetTrianPair trainpair in EstimateNet.TrainPairs)
+                {
+                    if (this.listViewEstimateNetTrainingPairs.Columns.Count == 0)
+                    {
+                        System.Windows.Forms.ColumnHeader ch = new System.Windows.Forms.ColumnHeader();
+                        ch.Text = "";
+                        ch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+                        this.listViewEstimateNetTrainingPairs.Columns.Add(ch);
+                        foreach (EstimateNetInputCategory category in EstimateNet.InputCategories)
+                        {
+                            ch = new System.Windows.Forms.ColumnHeader();
+                            ch.Text = category.Name;
+                            ch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+                            this.listViewEstimateNetTrainingPairs.Columns.Add(ch);
+                        }
+                        ch = new System.Windows.Forms.ColumnHeader();
+                        ch.Text = EstimateNet.Output.Name;
+                        ch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+                        this.listViewEstimateNetTrainingPairs.Columns.Add(ch);
+                    }
+                    System.Windows.Forms.ListViewItem lvi = new System.Windows.Forms.ListViewItem("Training pair", 0);
+                    foreach (EstimateNetInputValue inputvalue in trainpair.Sources)
+                    {
+                        if (lvi.SubItems.Count < this.listViewEstimateNetTrainingPairs.Columns.Count - 1)
+                            lvi.SubItems.Add(new System.Windows.Forms.ListViewItem.ListViewSubItem(lvi, inputvalue.Name));
+                    }
+                    while (lvi.SubItems.Count < this.listViewEstimateNetTrainingPairs.Columns.Count - 1)
+                        lvi.SubItems.Add(new System.Windows.Forms.ListViewItem.ListViewSubItem(lvi, String.Empty));
+                    string s = string.Empty;
+                    foreach (EstimateNetOutputValue outputvalue in trainpair.Targets)
+                    {
+                        if (outputvalue.Checked)
+                        {
+                            if (s.Length > 0)
+                                s = s + '\n';
+                            s = s + outputvalue.Name;
+                        }
+                    }
+                    int p = s.LastIndexOf('\n');
+                    if (p >= 0)
+                    {
+                        s = s.Substring(0, p) + " and " + s.Substring(p + 1);
+                        while ((p = s.LastIndexOf('\n')) >= 0)
+                            s = s.Substring(0, p) + ", " + s.Substring(p + 1);
+                    }
+                    lvi.SubItems.Add(new System.Windows.Forms.ListViewItem.ListViewSubItem(lvi, s));
+                    lvi.Tag = trainpair;
+                    this.listViewEstimateNetTrainingPairs.Items.Add(lvi);
+                }
+                foreach (System.Windows.Forms.ColumnHeader ch in this.listViewEstimateNetTrainingPairs.Columns)
+                    ch.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.buttonEstimateNetTrainingCreate.Enabled = true;
+                this.buttonEstimateNetTrainingModify.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
+                this.buttonEstimateNetTrainingDelete.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -252,6 +337,60 @@ namespace OSDevGrp.NeuralNetworks
                     binding.ReadValue();
                 foreach (System.Windows.Forms.Binding binding in this.checkBoxXOrNetResult.DataBindings)
                     binding.ReadValue();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void listViewEstimateNetTrainingPairs_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            try
+            {
+                this.buttonEstimateNetTrainingModify.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
+                this.buttonEstimateNetTrainingDelete.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void buttonEstimateNetTrainingCreate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EstimateNetTrianPair trainpair = EstimateNet.TrainPairs.Create();
+                EstimateNetTrainPairModifier modifier = new EstimateNetTrainPairModifier(trainpair);
+                if (modifier.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                }
+                modifier.Dispose();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void buttonEstimateNetTrainingModify_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                throw new System.NotImplementedException();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void buttonEstimateNetTrainingDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                throw new System.NotImplementedException();
             }
             catch (System.Exception ex)
             {
