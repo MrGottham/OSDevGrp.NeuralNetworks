@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panelInput = new System.Windows.Forms.Panel();
-            this.panelOutput = new System.Windows.Forms.Panel();
-            this.panelButtons = new System.Windows.Forms.Panel();
             this.groupBoxInput = new System.Windows.Forms.GroupBox();
+            this.panelOutput = new System.Windows.Forms.Panel();
             this.groupBoxOutput = new System.Windows.Forms.GroupBox();
+            this.panelButtons = new System.Windows.Forms.Panel();
             this.panelButtonsList = new System.Windows.Forms.Panel();
-            this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonOK = new System.Windows.Forms.Button();
             this.panelInput.SuspendLayout();
             this.panelOutput.SuspendLayout();
             this.panelButtons.SuspendLayout();
@@ -48,17 +48,37 @@
             this.panelInput.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelInput.Location = new System.Drawing.Point(0, 0);
             this.panelInput.Name = "panelInput";
-            this.panelInput.Size = new System.Drawing.Size(394, 60);
+            this.panelInput.Size = new System.Drawing.Size(394, 150);
             this.panelInput.TabIndex = 0;
+            // 
+            // groupBoxInput
+            // 
+            this.groupBoxInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxInput.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxInput.Name = "groupBoxInput";
+            this.groupBoxInput.Size = new System.Drawing.Size(394, 150);
+            this.groupBoxInput.TabIndex = 0;
+            this.groupBoxInput.TabStop = false;
+            this.groupBoxInput.Text = "Input";
             // 
             // panelOutput
             // 
             this.panelOutput.Controls.Add(this.groupBoxOutput);
             this.panelOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelOutput.Location = new System.Drawing.Point(0, 60);
+            this.panelOutput.Location = new System.Drawing.Point(0, 150);
             this.panelOutput.Name = "panelOutput";
-            this.panelOutput.Size = new System.Drawing.Size(394, 226);
+            this.panelOutput.Size = new System.Drawing.Size(394, 136);
             this.panelOutput.TabIndex = 1;
+            // 
+            // groupBoxOutput
+            // 
+            this.groupBoxOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxOutput.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxOutput.Name = "groupBoxOutput";
+            this.groupBoxOutput.Size = new System.Drawing.Size(394, 136);
+            this.groupBoxOutput.TabIndex = 0;
+            this.groupBoxOutput.TabStop = false;
+            this.groupBoxOutput.Text = "Output";
             // 
             // panelButtons
             // 
@@ -68,26 +88,6 @@
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(394, 32);
             this.panelButtons.TabIndex = 2;
-            // 
-            // groupBoxInput
-            // 
-            this.groupBoxInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxInput.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxInput.Name = "groupBoxInput";
-            this.groupBoxInput.Size = new System.Drawing.Size(394, 60);
-            this.groupBoxInput.TabIndex = 0;
-            this.groupBoxInput.TabStop = false;
-            this.groupBoxInput.Text = "Input";
-            // 
-            // groupBoxOutput
-            // 
-            this.groupBoxOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxOutput.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxOutput.Name = "groupBoxOutput";
-            this.groupBoxOutput.Size = new System.Drawing.Size(394, 226);
-            this.groupBoxOutput.TabIndex = 0;
-            this.groupBoxOutput.TabStop = false;
-            this.groupBoxOutput.Text = "Output";
             // 
             // panelButtonsList
             // 
@@ -99,16 +99,6 @@
             this.panelButtonsList.Size = new System.Drawing.Size(162, 32);
             this.panelButtonsList.TabIndex = 0;
             // 
-            // buttonOK
-            // 
-            this.buttonOK.Location = new System.Drawing.Point(3, 6);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 0;
-            this.buttonOK.Text = "&OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
             // buttonCancel
             // 
             this.buttonCancel.Location = new System.Drawing.Point(84, 6);
@@ -118,6 +108,16 @@
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonOK
+            // 
+            this.buttonOK.Location = new System.Drawing.Point(3, 6);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.TabIndex = 0;
+            this.buttonOK.Text = "&OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // EstimateNetTrainPairModifier
             // 

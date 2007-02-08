@@ -13,7 +13,7 @@ namespace OSDevGrp.NeuralNetworks
         private XOrNet _XOrNet = null;
         private EstimateNet _EstimateNet = null;
 
-        public NeuralNetworks()
+        public NeuralNetworks() : base()
         {
             InitializeComponent();
             try
