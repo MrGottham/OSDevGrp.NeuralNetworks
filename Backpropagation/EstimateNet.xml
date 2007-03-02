@@ -2,10 +2,13 @@
 <EstimateNet>
   <Definition>
     <Neurons>5</Neurons>
-    <Neurons>10</Neurons>
-    <Neurons>25</Neurons>
-    <Neurons>25</Neurons>
-    <Neurons>25</Neurons>
+    <Neurons>15</Neurons>
+    <Neurons>45</Neurons>
+    <Neurons>50</Neurons>
+    <Neurons>50</Neurons>
+    <Neurons>50</Neurons>
+    <Neurons>60</Neurons>
+    <Neurons>20</Neurons>
     <Neurons>5</Neurons>
   </Definition>
   <InputCategories>
@@ -138,6 +141,62 @@
     <TrainPair>
       <Source>1;1;1;1;1</Source>
       <Target>1;0;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>1;1;2;2;2</Source>
+      <Target>1;0;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>1;1;4;4;4</Source>
+      <Target>1;0;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>1;1;8;8;8</Source>
+      <Target>1;0;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>2;1;1;1;1</Source>
+      <Target>1;0;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>2;1;1;8;8</Source>
+      <Target>1;0;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>2;2;2;1;1</Source>
+      <Target>1;1;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>2;2;2;8;8</Source>
+      <Target>1;1;0;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>4;2;2;1;1</Source>
+      <Target>0;1;1;0;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>4;2;8;8;8</Source>
+      <Target>0;0;1;1;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>4;4;2;1;1</Source>
+      <Target>0;0;1;1;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>4;4;8;8;8</Source>
+      <Target>0;0;1;1;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>4;8;4;1;1</Source>
+      <Target>0;0;1;1;0</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>4;8;8;8;8</Source>
+      <Target>0;0;0;1;1</Target>
+    </TrainPair>
+    <TrainPair>
+      <Source>8;4;4;1;1</Source>
+      <Target>0;0;0;1;1</Target>
     </TrainPair>
     <TrainPair>
       <Source>8;8;8;8;8</Source>

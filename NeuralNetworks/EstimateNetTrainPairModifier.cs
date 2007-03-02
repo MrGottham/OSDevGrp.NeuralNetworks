@@ -116,11 +116,25 @@ namespace OSDevGrp.NeuralNetworks
                         for (int j = 0; j < this.groupBoxInput.Controls[i].Controls.Count; j++)
                         {
                             if (this.groupBoxInput.Controls[i].Controls[j] is System.Windows.Forms.RadioButton)
-                                TrainPair.Sources[i] = (EstimateNetInputValue) this.groupBoxInput.Controls[i].Controls[j].Tag;
+                            {
+                                if (((System.Windows.Forms.RadioButton) this.groupBoxInput.Controls[i].Controls[j]).Checked)
+                                    TrainPair.Sources[this.groupBoxInput.Controls[i].TabIndex] = (EstimateNetInputValue) this.groupBoxInput.Controls[i].Controls[j].Tag;
+                            }
                         }
                     }
                 }
-
+                for (int i = 0; i < this.groupBoxOutput.Controls.Count; i++)
+                {
+                    if (this.groupBoxOutput.Controls[i] is System.Windows.Forms.CheckBox)
+                    {
+                        if (((System.Windows.Forms.CheckBox) this.groupBoxOutput.Controls[i]).Checked)
+                            TrainPair.Targets[i].Value = TrainPair.EstimateNet.Sigmoid.UpperBound;
+                        else if (TrainPair.EstimateNet.Sigmoid.LowerBound < 0)
+                            TrainPair.Targets[i].Value = 0;
+                        else
+                            TrainPair.Targets[i].Value = TrainPair.EstimateNet.Sigmoid.LowerBound;
+                    }
+                }
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 this.Close();
             }

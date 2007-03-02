@@ -72,6 +72,7 @@
             this.listViewEstimateNetTrainingPairs = new System.Windows.Forms.ListView();
             this.panelEstimateNetTrainingButtons = new System.Windows.Forms.Panel();
             this.panelEstimateNetTrainingButtonsList = new System.Windows.Forms.Panel();
+            this.buttonEstimateNetTrainingSave = new System.Windows.Forms.Button();
             this.buttonEstimateNetTrainingDelete = new System.Windows.Forms.Button();
             this.buttonEstimateNetTrainingModify = new System.Windows.Forms.Button();
             this.buttonEstimateNetTrainingCreate = new System.Windows.Forms.Button();
@@ -171,8 +172,10 @@
             // 
             // checkBoxXOrNetResult
             // 
+            this.checkBoxXOrNetResult.AutoCheck = false;
             this.checkBoxXOrNetResult.AutoSize = true;
-            this.checkBoxXOrNetResult.Enabled = false;
+            this.checkBoxXOrNetResult.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxXOrNetResult.ForeColor = System.Drawing.SystemColors.ControlText;
             this.checkBoxXOrNetResult.Location = new System.Drawing.Point(236, 19);
             this.checkBoxXOrNetResult.Name = "checkBoxXOrNetResult";
             this.checkBoxXOrNetResult.Size = new System.Drawing.Size(56, 17);
@@ -556,6 +559,7 @@
             this.listViewEstimateNetTrainingPairs.TabIndex = 0;
             this.listViewEstimateNetTrainingPairs.UseCompatibleStateImageBehavior = false;
             this.listViewEstimateNetTrainingPairs.View = System.Windows.Forms.View.Details;
+            this.listViewEstimateNetTrainingPairs.DoubleClick += new System.EventHandler(this.buttonEstimateNetTrainingModify_Click);
             this.listViewEstimateNetTrainingPairs.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewEstimateNetTrainingPairs_ItemSelectionChanged);
             // 
             // panelEstimateNetTrainingButtons
@@ -569,14 +573,25 @@
             // 
             // panelEstimateNetTrainingButtonsList
             // 
+            this.panelEstimateNetTrainingButtonsList.Controls.Add(this.buttonEstimateNetTrainingSave);
             this.panelEstimateNetTrainingButtonsList.Controls.Add(this.buttonEstimateNetTrainingDelete);
             this.panelEstimateNetTrainingButtonsList.Controls.Add(this.buttonEstimateNetTrainingModify);
             this.panelEstimateNetTrainingButtonsList.Controls.Add(this.buttonEstimateNetTrainingCreate);
             this.panelEstimateNetTrainingButtonsList.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelEstimateNetTrainingButtonsList.Location = new System.Drawing.Point(332, 0);
+            this.panelEstimateNetTrainingButtonsList.Location = new System.Drawing.Point(252, 0);
             this.panelEstimateNetTrainingButtonsList.Name = "panelEstimateNetTrainingButtonsList";
-            this.panelEstimateNetTrainingButtonsList.Size = new System.Drawing.Size(240, 32);
+            this.panelEstimateNetTrainingButtonsList.Size = new System.Drawing.Size(320, 32);
             this.panelEstimateNetTrainingButtonsList.TabIndex = 0;
+            // 
+            // buttonEstimateNetTrainingSave
+            // 
+            this.buttonEstimateNetTrainingSave.Location = new System.Drawing.Point(246, 6);
+            this.buttonEstimateNetTrainingSave.Name = "buttonEstimateNetTrainingSave";
+            this.buttonEstimateNetTrainingSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonEstimateNetTrainingSave.TabIndex = 3;
+            this.buttonEstimateNetTrainingSave.Text = "&Save";
+            this.buttonEstimateNetTrainingSave.UseVisualStyleBackColor = true;
+            this.buttonEstimateNetTrainingSave.Click += new System.EventHandler(this.buttonEstimateNetTrainingSave_Click);
             // 
             // buttonEstimateNetTrainingDelete
             // 
@@ -689,56 +704,61 @@
             // 
             // checkBoxEstimateNetOutput5
             // 
+            this.checkBoxEstimateNetOutput5.AutoCheck = false;
             this.checkBoxEstimateNetOutput5.AutoSize = true;
-            this.checkBoxEstimateNetOutput5.Enabled = false;
             this.checkBoxEstimateNetOutput5.Location = new System.Drawing.Point(6, 111);
             this.checkBoxEstimateNetOutput5.Name = "checkBoxEstimateNetOutput5";
             this.checkBoxEstimateNetOutput5.Size = new System.Drawing.Size(53, 17);
             this.checkBoxEstimateNetOutput5.TabIndex = 4;
+            this.checkBoxEstimateNetOutput5.TabStop = false;
             this.checkBoxEstimateNetOutput5.Text = "Value";
             this.checkBoxEstimateNetOutput5.UseVisualStyleBackColor = true;
             // 
             // checkBoxEstimateNetOutput4
             // 
+            this.checkBoxEstimateNetOutput4.AutoCheck = false;
             this.checkBoxEstimateNetOutput4.AutoSize = true;
-            this.checkBoxEstimateNetOutput4.Enabled = false;
             this.checkBoxEstimateNetOutput4.Location = new System.Drawing.Point(6, 88);
             this.checkBoxEstimateNetOutput4.Name = "checkBoxEstimateNetOutput4";
             this.checkBoxEstimateNetOutput4.Size = new System.Drawing.Size(53, 17);
             this.checkBoxEstimateNetOutput4.TabIndex = 3;
+            this.checkBoxEstimateNetOutput4.TabStop = false;
             this.checkBoxEstimateNetOutput4.Text = "Value";
             this.checkBoxEstimateNetOutput4.UseVisualStyleBackColor = true;
             // 
             // checkBoxEstimateNetOutput3
             // 
+            this.checkBoxEstimateNetOutput3.AutoCheck = false;
             this.checkBoxEstimateNetOutput3.AutoSize = true;
-            this.checkBoxEstimateNetOutput3.Enabled = false;
             this.checkBoxEstimateNetOutput3.Location = new System.Drawing.Point(6, 66);
             this.checkBoxEstimateNetOutput3.Name = "checkBoxEstimateNetOutput3";
             this.checkBoxEstimateNetOutput3.Size = new System.Drawing.Size(53, 17);
             this.checkBoxEstimateNetOutput3.TabIndex = 2;
+            this.checkBoxEstimateNetOutput3.TabStop = false;
             this.checkBoxEstimateNetOutput3.Text = "Value";
             this.checkBoxEstimateNetOutput3.UseVisualStyleBackColor = true;
             // 
             // checkBoxEstimateNetOutput2
             // 
+            this.checkBoxEstimateNetOutput2.AutoCheck = false;
             this.checkBoxEstimateNetOutput2.AutoSize = true;
-            this.checkBoxEstimateNetOutput2.Enabled = false;
             this.checkBoxEstimateNetOutput2.Location = new System.Drawing.Point(6, 43);
             this.checkBoxEstimateNetOutput2.Name = "checkBoxEstimateNetOutput2";
             this.checkBoxEstimateNetOutput2.Size = new System.Drawing.Size(53, 17);
             this.checkBoxEstimateNetOutput2.TabIndex = 1;
+            this.checkBoxEstimateNetOutput2.TabStop = false;
             this.checkBoxEstimateNetOutput2.Text = "Value";
             this.checkBoxEstimateNetOutput2.UseVisualStyleBackColor = true;
             // 
             // checkBoxEstimateNetOutput1
             // 
+            this.checkBoxEstimateNetOutput1.AutoCheck = false;
             this.checkBoxEstimateNetOutput1.AutoSize = true;
-            this.checkBoxEstimateNetOutput1.Enabled = false;
             this.checkBoxEstimateNetOutput1.Location = new System.Drawing.Point(6, 20);
             this.checkBoxEstimateNetOutput1.Name = "checkBoxEstimateNetOutput1";
             this.checkBoxEstimateNetOutput1.Size = new System.Drawing.Size(53, 17);
             this.checkBoxEstimateNetOutput1.TabIndex = 0;
+            this.checkBoxEstimateNetOutput1.TabStop = false;
             this.checkBoxEstimateNetOutput1.Text = "Value";
             this.checkBoxEstimateNetOutput1.UseVisualStyleBackColor = true;
             // 
@@ -1251,6 +1271,7 @@
         private System.Windows.Forms.Button buttonEstimateNetTrainingDelete;
         private System.Windows.Forms.Button buttonEstimateNetTrainingModify;
         private System.Windows.Forms.Button buttonEstimateNetTrainingCreate;
+        private System.Windows.Forms.Button buttonEstimateNetTrainingSave;
     }
 }
 

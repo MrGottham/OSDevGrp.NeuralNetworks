@@ -265,6 +265,7 @@ namespace OSDevGrp.NeuralNetworks
                 this.buttonEstimateNetTrainingCreate.Enabled = true;
                 this.buttonEstimateNetTrainingModify.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
                 this.buttonEstimateNetTrainingDelete.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
+                this.buttonEstimateNetTrainingSave.Enabled = EstimateNet.TrainPairs.Modified;
             }
             catch (System.Exception ex)
             {
@@ -350,6 +351,7 @@ namespace OSDevGrp.NeuralNetworks
             {
                 this.buttonEstimateNetTrainingModify.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
                 this.buttonEstimateNetTrainingDelete.Enabled = this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0;
+                this.buttonEstimateNetTrainingSave.Enabled = EstimateNet.TrainPairs.Modified;
             }
             catch (System.Exception ex)
             {
@@ -365,8 +367,17 @@ namespace OSDevGrp.NeuralNetworks
                 EstimateNetTrainPairModifier modifier = new EstimateNetTrainPairModifier(trainpair);
                 if (modifier.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
+                    trainpair.Update();
+                    UpdateEstimateNetTrainingPairs();
+                    if (this.listViewEstimateNetTrainingPairs.Items.Count > 0)
+                    {
+                        this.listViewEstimateNetTrainingPairs.Items[this.listViewEstimateNetTrainingPairs.Items.Count - 1].Selected = true;
+                        this.listViewEstimateNetTrainingPairs.Focus();
+                    }
+                    EstimateNet.ReTrain();
                 }
                 modifier.Dispose();
+                this.buttonEstimateNetTrainingSave.Enabled = EstimateNet.TrainPairs.Modified;
             }
             catch (System.Exception ex)
             {
@@ -378,7 +389,41 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                throw new System.NotImplementedException();
+                if (this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0)
+                {
+                    System.Collections.Generic.List<EstimateNetTrianPair> list = new System.Collections.Generic.List<EstimateNetTrianPair>();
+                    bool updated = false;
+                    foreach (System.Windows.Forms.ListViewItem item in this.listViewEstimateNetTrainingPairs.SelectedItems)
+                    {
+                        EstimateNetTrianPair trainpair = (EstimateNetTrianPair) item.Tag;
+                        EstimateNetTrainPairModifier modifier = new EstimateNetTrainPairModifier(trainpair);
+                        list.Add(trainpair);
+                        if (modifier.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                        {
+                            trainpair.Update();
+                            updated = true;
+                        }
+                        modifier.Dispose();
+                    }
+                    if (updated)
+                    {
+                        UpdateEstimateNetTrainingPairs();
+                        if (this.listViewEstimateNetTrainingPairs.Items.Count > 0)
+                        {
+                            foreach (System.Windows.Forms.ListViewItem item in this.listViewEstimateNetTrainingPairs.Items)
+                            {
+                                EstimateNetTrianPair trainpair = (EstimateNetTrianPair)item.Tag;
+                                if (list.IndexOf(trainpair) >= 0)
+                                    item.Selected = true;
+                            }
+                        }
+                        EstimateNet.ReTrain();
+                    }
+                    while (list.Count > 0)
+                        list.Clear();
+                    this.listViewEstimateNetTrainingPairs.Focus();
+                    this.buttonEstimateNetTrainingSave.Enabled = EstimateNet.TrainPairs.Modified;
+                }
             }
             catch (System.Exception ex)
             {
@@ -390,7 +435,36 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                throw new System.NotImplementedException();
+                if (this.listViewEstimateNetTrainingPairs.SelectedItems.Count > 0)
+                {
+                    if (System.Windows.Forms.MessageBox.Show(this, "Delete the selected train pair?", "Delete", System.Windows.Forms.MessageBoxButtons.YesNoCancel, System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        foreach (System.Windows.Forms.ListViewItem item in this.listViewEstimateNetTrainingPairs.SelectedItems)
+                        {
+                            EstimateNetTrianPair trainpair = (EstimateNetTrianPair) item.Tag;
+                            trainpair.Delete();
+                        }
+                        UpdateEstimateNetTrainingPairs();
+                        if (this.listViewEstimateNetTrainingPairs.Items.Count > 0)
+                            this.listViewEstimateNetTrainingPairs.Items[0].Selected = true;
+                        EstimateNet.ReTrain();
+                        this.listViewEstimateNetTrainingPairs.Focus();
+                    }
+                    this.buttonEstimateNetTrainingSave.Enabled = EstimateNet.TrainPairs.Modified;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(this, ex.Message, "Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void buttonEstimateNetTrainingSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EstimateNet.SaveConfiguration();
+                this.buttonEstimateNetTrainingSave.Enabled = EstimateNet.TrainPairs.Modified;
             }
             catch (System.Exception ex)
             {

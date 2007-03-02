@@ -33,14 +33,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BB609D25CC4AFF7D1F376018385DA357"
+        "MsmKey" = "8:_ED9A5F815CF34EDD9186F1E389EED80D"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_AE063150D7C7404094F430FA7FE2AC35"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BB609D25CC4AFF7D1F376018385DA357"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -61,6 +67,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
         "Release"
         {
@@ -77,6 +94,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -110,7 +138,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Backpropagation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Backpropagation, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BB609D25CC4AFF7D1F376018385DA357"
@@ -141,6 +169,26 @@
             {
             "SourcePath" = "8:..\\NeuralNetworks\\NeuralNetworks.ico"
             "TargetName" = "8:NeuralNetworks.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_7EEB593E81D44E6B81D2074F7F9B4B3E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED9A5F815CF34EDD9186F1E389EED80D"
+            {
+            "SourcePath" = "8:..\\Backpropagation\\EstimateNet.xml"
+            "TargetName" = "8:EstimateNet.xml"
             "Tag" = "8:"
             "Folder" = "8:_7EEB593E81D44E6B81D2074F7F9B4B3E"
             "Condition" = "8:"
@@ -223,14 +271,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Neural Networks"
-        "ProductCode" = "8:{152562FF-8543-481E-8B83-62EE1DEA50DF}"
-        "PackageCode" = "8:{64BE1701-89F3-48E3-967C-3FB6A278E732}"
+        "ProductCode" = "8:{A49A72AC-C9A2-498C-9594-2E789C8A8987}"
+        "PackageCode" = "8:{ECBF883C-858B-4A33-A63D-514E20600492}"
         "UpgradeCode" = "8:{2AA9A693-44BB-48E6-8BAC-F52B033E04F2}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:OS Development Group"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -758,7 +806,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AE063150D7C7404094F430FA7FE2AC35"
             {
-            "SourcePath" = "8:..\\NeuralNetworks\\obj\\Debug\\NeuralNetworks.exe"
+            "SourcePath" = "8:..\\NeuralNetworks\\obj\\Release\\NeuralNetworks.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7EEB593E81D44E6B81D2074F7F9B4B3E"

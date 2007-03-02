@@ -69,6 +69,8 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
+                base.LearningRate = 0.1F;
+                base.Tolerance = 0.1;
                 XmlSetupDocument = Definition.XmlSetupDocument;
                 Initialize(SETUP_FILENAME);
             }
@@ -383,6 +385,39 @@ namespace OSDevGrp.NeuralNetworks
             try
             {
                 base.Load(FileName);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void SaveConfiguration()
+        {
+            try
+            {
+                System.IO.FileStream fs = null;
+                System.Xml.XmlTextWriter tw = null;
+                try
+                {
+                    fs = new System.IO.FileStream(SetupFileName, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write, System.IO.FileShare.None);
+                    tw = new System.Xml.XmlTextWriter(fs, System.Text.Encoding.Default);
+                    tw.Formatting = System.Xml.Formatting.Indented;
+                    tw.BaseStream.SetLength(0);
+                    XmlSetupDocument.WriteTo(tw);
+                    tw.Flush();
+                    tw.Close();
+                    fs.Close();
+                    TrainPairs.Modified = false;
+                }
+                catch (System.Exception ex)
+                {
+                    if (tw != null)
+                        tw.Close();
+                    if (fs != null)
+                        fs.Close();
+                    throw ex;
+                }
             }
             catch (System.Exception ex)
             {
@@ -802,7 +837,7 @@ namespace OSDevGrp.NeuralNetworks
 
     public class EstimateNetTrainPairs : System.Collections.Generic.List<EstimateNetTrianPair>
     {
-        private System.Xml.XmlNode _TrainPairsXmlNode = null;
+        private System.Xml.XmlNode _XmlNode = null;
         private EstimateNet _EstimateNet = null;
         private uint _InputNeurons = 0;
         private uint _OutputNeurons = 0;
@@ -812,12 +847,12 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                TrainPairsXmlNode = xmlnode;
+                XmlNode = xmlnode;
                 EstimateNet = net;
                 InputNeurons = inputneurons;
                 OutputNeurons = outputneurons;
                 Modified = false;
-                foreach (System.Xml.XmlNode xmlchildnode in TrainPairsXmlNode.ChildNodes)
+                foreach (System.Xml.XmlNode xmlchildnode in XmlNode.ChildNodes)
                 {
                     switch (xmlchildnode.Name.ToUpper())
                     {
@@ -827,7 +862,7 @@ namespace OSDevGrp.NeuralNetworks
                     }
                 }
                 if (Count == 0)
-                    throw new System.Exception("Can't find any nodes named 'TrainPair' under the node named '" + TrainPairsXmlNode.Name + "' in the file named '" + setupfilename + "'.");
+                    throw new System.Exception("Can't find any nodes named 'TrainPair' under the node named '" + XmlNode.Name + "' in the file named '" + setupfilename + "'.");
             }
             catch (System.Exception ex)
             {
@@ -848,15 +883,15 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        private System.Xml.XmlNode TrainPairsXmlNode
+        public System.Xml.XmlNode XmlNode
         {
             get
             {
-                return _TrainPairsXmlNode;
+                return _XmlNode;
             }
-            set
+            private set
             {
-                _TrainPairsXmlNode = value;
+                _XmlNode = value;
             }
         }
 
@@ -902,7 +937,7 @@ namespace OSDevGrp.NeuralNetworks
             {
                 return _Modified;
             }
-            private set
+            set
             {
                 _Modified = value;
             }
@@ -912,7 +947,7 @@ namespace OSDevGrp.NeuralNetworks
         {
             try
             {
-                System.Xml.XmlElement xmlelement = TrainPairsXmlNode.OwnerDocument.CreateElement("TrainPair");
+                System.Xml.XmlElement xmlelement = XmlNode.OwnerDocument.CreateElement("TrainPair");
                 xmlelement.AppendChild(xmlelement.OwnerDocument.CreateElement("Source"));
                 for (int i = 0; i < InputNeurons; i++)
                 {
@@ -943,6 +978,30 @@ namespace OSDevGrp.NeuralNetworks
                         xmlelement.LastChild.InnerText = xmlelement.LastChild.InnerText + EstimateNet.Sigmoid.LowerBound.ToString();
                 }
                 return new EstimateNetTrianPair(xmlelement, string.Empty, EstimateNet, InputNeurons, OutputNeurons);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Update(EstimateNetTrianPair trainpair)
+        {
+            try
+            {
+                trainpair.Update();
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Delete(EstimateNetTrianPair trainpair)
+        {
+            try
+            {
+                trainpair.Delete();
             }
             catch (System.Exception ex)
             {
@@ -1050,13 +1109,13 @@ namespace OSDevGrp.NeuralNetworks
             }
         }
 
-        private System.Xml.XmlNode XmlNode
+        public System.Xml.XmlNode XmlNode
         {
             get
             {
                 return _XmlNode;
             }
-            set
+            private set
             {
                 _XmlNode = value;
             }
@@ -1143,6 +1202,52 @@ namespace OSDevGrp.NeuralNetworks
             private set
             {
                 _Targets = value;
+            }
+        }
+
+        public void Update()
+        {
+            try
+            {
+                if (EstimateNet.TrainPairs.IndexOf(this) < 0)
+                {
+                    EstimateNet.TrainPairs.XmlNode.AppendChild(XmlNode);
+                    EstimateNet.TrainPairs.Add(this);
+                }
+                SourceXmlNode.InnerText = "";
+                for (int i = 0; i < Sources.Count; i++)
+                {
+                    if (SourceXmlNode.InnerText.Length > 0)
+                        SourceXmlNode.InnerText = SourceXmlNode.InnerText + ';';
+                    SourceXmlNode.InnerText = SourceXmlNode.InnerText + Sources[i].Value.ToString();
+                }
+                TargetXmlNode.InnerText = "";
+                for (int i = 0; i < Targets.Count; i++)
+                {
+                    if (TargetXmlNode.InnerText.Length > 0)
+                        TargetXmlNode.InnerText = TargetXmlNode.InnerText + ';';
+                    TargetXmlNode.InnerText = TargetXmlNode.InnerText + Targets[i].Value.ToString();
+                }
+                EstimateNet.TrainPairs.Modified = true;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Delete()
+        {
+            try
+            {
+                EstimateNet.TrainPairs.XmlNode.RemoveChild(XmlNode);
+                while (EstimateNet.TrainPairs.IndexOf(this) >= 0)
+                    EstimateNet.TrainPairs.Remove(this);
+                EstimateNet.TrainPairs.Modified = true;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
             }
         }
     }
