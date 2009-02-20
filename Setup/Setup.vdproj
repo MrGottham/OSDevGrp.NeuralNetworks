@@ -138,7 +138,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Backpropagation, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Backpropagation, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BB609D25CC4AFF7D1F376018385DA357"
@@ -266,19 +266,20 @@
         "MsiBootstrapper"
         {
         "LangId" = "3:1033"
+        "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Neural Networks"
-        "ProductCode" = "8:{A49A72AC-C9A2-498C-9594-2E789C8A8987}"
-        "PackageCode" = "8:{ECBF883C-858B-4A33-A63D-514E20600492}"
+        "ProductCode" = "8:{B53DA147-20B0-42A4-9298-32107F26B361}"
+        "PackageCode" = "8:{A472C0EC-A5CE-4A92-927D-2743E2713EDB}"
         "UpgradeCode" = "8:{2AA9A693-44BB-48E6-8BAC-F52B033E04F2}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:OS Development Group"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -832,9 +833,6 @@
                 {
                 }
             }
-        }
-        "VJSharpPlugin"
-        {
         }
     }
 }
